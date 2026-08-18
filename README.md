@@ -1,0 +1,47 @@
+# MGIM Presentation Pipeline
+
+A Claude Code implementation of Markus Goetz Interim Management's multi-agent presentation
+system (originally prototyped in Langdock). Say what you need to Maximilian and the pipeline
+runs intake → research → storyline → content → design/generation → quality review → delivery,
+producing a real `.pptx` at the end — not just prompts describing one.
+
+## How it works
+
+| Agent | Role | File |
+|---|---|---|
+| **Maximilian** | Orchestrator — intake, sequencing, code execution, Visual Quality Gate, delivery | `.claude/skills/presentation-orchestrator/SKILL.md` |
+| **Finn** | Research — sourced Markdown Research Brief | `.claude/agents/finn-research.md` |
+| **Nova** | Storyline — narrative framework, slide arc, assigns `slide_id` | `.claude/agents/nova-storyline.md` |
+| **Luca** | Content — headlines, bullets, speaker notes, alt-text | `.claude/agents/luca-content.md` |
+| **Veronika** | Design — writes (never executes) chart + PptxGenJS scripts | `.claude/agents/veronika-design.md` |
+| **Jürgen** | Quality — five-dimension review, binding release decision | `.claude/agents/juergen-quality.md` |
+
+Just ask for a presentation and the `presentation-orchestrator` skill takes it from there.
+
+## Shared resources (single source of truth — don't duplicate these into agent prompts)
+
+- `brand-guide/mgim-brand-guide.md` — the MGIM CI. Every agent reads this file directly instead
+  of carrying its own copy, so a brand update only has to happen once.
+- `docs/slide-schema.md` — the `slide_id` contract that keeps Nova/Luca/Veronika/Jürgen's
+  documents joinable across a whole project, replacing the free-form-Markdown handoff from the
+  original Langdock design.
+- `lib/pptx-helpers.js` / `lib/chart_style.py` — canonical color tokens and layout/chart
+  primitives that Veronika's generated scripts `require`/`import` rather than redefining.
+
+## What changed vs. the original Langdock design
+
+- **Brand guide deduplicated** — was pasted identically into Maximilian's, Veronika's, and the
+  skill's prompts (3 copies to keep in sync); now lives in one file.
+- **`slide_id` contract added** — the original relied on all five agents implicitly agreeing on
+  "slide 4"; see `docs/slide-schema.md` for why that's now explicit.
+- **Real code execution** — Langdock's `/mnt/data/` paths assumed a specific sandbox; this
+  version runs on Claude Code's actual filesystem/Bash/Node, under `output/<slug>/`.
+- **One documented, deliberate CI override**: Claude Code's built-in `pptx` skill generally
+  advises against decorative accent bars/stripes (a common AI-slop tell). MGIM's CI uses them on
+  purpose as part of its "slash /" signature system — see the brand guide's final section for
+  why that override is intentional and should not be "fixed" by a future session.
+
+## Requirements
+
+`pptxgenjs` (npm) and `matplotlib`/`numpy` (pip) aren't preinstalled in every environment this
+runs in — the orchestrator skill installs them on first use if a `require`/`import` fails.
