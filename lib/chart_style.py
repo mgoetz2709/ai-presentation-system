@@ -1,6 +1,6 @@
 """MGIM presentation pipeline — shared matplotlib chart style.
 
-Single canonical copy. Veronika's generated chart scripts import this instead of redefining the
+Single canonical copy. The Design Agent's generated chart scripts import this instead of redefining the
 CI colors and axis styling inline each time. Keep MGIM_COLORS in sync with
 brand-guide/mgim-brand-guide.md if the CI ever changes.
 
@@ -55,8 +55,8 @@ def apply_mgim_style(ax):
 
 
 def save_chart(fig, path):
-    """Save with the CI-standard export settings and print the confirmation line Maximilian
-    checks for before proceeding to the next chart."""
+    """Save with the CI-standard export settings and print the confirmation line the
+    Orchestrator checks for before proceeding to the next chart."""
     fig.savefig(path, dpi=DPI, bbox_inches="tight", transparent=False)
     plt.close(fig)
     print(f"Chart saved: {path}")

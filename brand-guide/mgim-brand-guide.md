@@ -1,8 +1,9 @@
 # Markus Goetz Interim Management — Corporate Identity Guide (v1.0, Mai 2026)
 
 This file is the **single source of truth** for MGIM's design standard. Every agent in the
-presentation pipeline (Maximilian, Veronika, Jürgen) reads this file directly — nobody
-inlines a copy of it into their own prompt. If the CI changes, it changes here, once.
+presentation pipeline (the Orchestrator, the Design Agent, the Quality Agent) reads this file
+directly — nobody inlines a copy of it into their own prompt. If the CI changes, it changes
+here, once.
 
 ## Brand Essence
 
@@ -90,8 +91,8 @@ decorative color bars, header/footer stripes, and single-side accent borders —
 treats those as a tell of generic AI-generated decks. **For MGIM's CI, that generic advice is
 overridden on purpose.** The top blue bar, the left blue bar on title/closing slides, and the
 blue accent bar beside insight boxes are a *deliberate, specified brand element* (the "slash /
-signature system"), not accidental filler. Veronika and Maximilian must use them as specified
-in this guide. Do not "fix" this by removing the bars — that would be undoing an explicit
+signature system"), not accidental filler. The Design Agent and the Orchestrator must use them
+as specified in this guide. Do not "fix" this by removing the bars — that would be undoing an explicit
 client CI decision. Everything else in the generic skill's Design Ideas / Avoid list (no
 gradients, no cream backgrounds, safe fonts, spacing discipline, QA process) still applies and
 reinforces this guide.
