@@ -1,7 +1,12 @@
 node_modules/
-output/
 __pycache__/
 *.pyc
 *.pdf
 *.jpg
 *-thumbs*.jpg
+
+# Regeneratable binary build output only — scripts and docs under output/<slug>/ are tracked so a
+# workspace reset never loses working documents or generator scripts, only the artifacts a
+# `python3 charts/*.py && node build/presentation.js` re-run reproduces in seconds.
+output/*/charts/*.png
+output/*/*.pptx
