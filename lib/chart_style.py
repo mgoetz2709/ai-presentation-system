@@ -1,6 +1,6 @@
 """MGIM presentation pipeline — shared matplotlib chart style.
 
-Single canonical copy. The Design Agent's generated chart scripts import this instead of redefining the
+Single canonical copy. The presentation-orchestrator's Phase 5 chart scripts import this instead of redefining the
 CI colors and axis styling inline each time. Keep MGIM_COLORS in sync with
 brand-guide/mgim-brand-guide.md if the CI ever changes.
 
