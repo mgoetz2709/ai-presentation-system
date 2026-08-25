@@ -26,6 +26,9 @@ delay.
 - `brand-guide/mgim-brand-guide.md` — the binding MGIM CI. Single source of truth; pass the
   Design Agent a *pointer* to this file, not a pasted copy.
 - `docs/slide-schema.md` — the `slide_id` contract every phase must respect.
+- `knowledge/` — sourced knowledge bases the Storyline/Content/Quality Agents apply directly
+  (e.g. `minto-pyramid-prinzip.md` for governing thought, MECE, SCQA, the headline test). Point
+  agents at the relevant file rather than summarizing it into their prompt.
 - `lib/pptx-helpers.js`, `lib/chart_style.py` — canonical color tokens + layout/chart
   primitives. Nobody redefines these; scripts `require`/`import` them.
 - `.claude/agents/research.md`, `storyline.md`, `content.md`, `design.md`, `quality.md` — the
@@ -127,7 +130,8 @@ deck that fails any gate is not delivered; it is corrected first.
 
 1. **No plain-text slides** — every slide has a designed layout element (card, chart, diagram,
    hero stat, structured grid). Headline + bullets alone fails.
-2. **Assertion headlines throughout** — every headline states a finding, never a topic label.
+2. **Assertion headlines throughout** — every headline passes the Minto headline test (states a
+   finding, answers "so what?"), never a topic label.
    Rewrite any that slipped through.
 3. **Data is visualized, not listed** — every quantitative claim appears in a chart, KPI card,
    progress bar, or hero stat, not just as bullet text.

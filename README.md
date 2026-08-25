@@ -28,6 +28,12 @@ Just ask for a presentation and the `presentation-orchestrator` skill takes it f
 - `lib/pptx-helpers.js` / `lib/chart_style.py` — canonical color tokens and layout/chart
   primitives that the Design Agent's generated scripts `require`/`import` rather than
   redefining.
+- `knowledge/` — sourced knowledge bases the Storyline, Content, and Quality Agents apply
+  directly rather than having summarized into their prompts. Currently:
+  `minto-pyramid-prinzip.md` (Barbara Minto's Pyramid Principle — governing thought, MECE
+  argument groups, SCQA openings, the headline test) drives the Storyline Agent's arc-building,
+  the Content Agent's bullet discipline, and the Quality Agent's Narrative Consistency /
+  Content Quality checks.
 
 ## What changed vs. the original Langdock design
 

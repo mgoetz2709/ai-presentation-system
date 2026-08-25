@@ -39,7 +39,7 @@ Quality Report) opens with this table before the per-slide detail sections:
 
 | Phase | Adds |
 |---|---|
-| **Storyline** | `working_headline`, `core_message`, `role_in_arc`, `framework` (deck-level, not per-slide) |
+| **Storyline** | `working_headline`, `core_message`, `role_in_arc`, `argument_group`, `framework` + `governing_thought` + MECE argument-group list (deck-level, not per-slide — see `knowledge/minto-pyramid-prinzip.md`) |
 | **Content** | `final_headline` (assertion, may refine the working headline), `bullets[]` (≤5), `speaker_notes`, `visual_spec` (what data/diagram this slide needs), `alt_text` |
 | **Design** | `slide_type` (TITLE/CONTENT/STAT/CHART/PROCESS/COMPARISON/TIMELINE/CLOSING), `chart_script_ref` (if CHART), `layout_notes` |
 | **Quality** | `dimension_findings[]` (dimension, severity, description, correction, responsible agent) |
