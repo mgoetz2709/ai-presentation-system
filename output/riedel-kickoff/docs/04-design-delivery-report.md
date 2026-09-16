@@ -42,11 +42,9 @@ Six content/design fixes from this review round:
    view on how to approach Fachbereich-integration — his experience should shape the plan, not
    just confirm it.
 
-**Open item, not resolved unilaterally:** Markus Goetz separately asked whether, in the spirit of
-the Pyramid Principle, this kind of "what we need from you / what's your view" moment belongs at
-the *front* of the deck instead of the close. That would mean reissuing the Storyline's slide_id
-index (Phase 3) — left as-is pending his decision; see `03-content-package.md` Slide 15 for the
-flagged open point.
+**Resolved:** Markus Goetz confirmed the "what we need from you / what's your view" moment stays
+at the close, not the front — fits the classic kickoff arc (build context and plan first, ask for
+input at the end). No Storyline change needed.
 
 ## Revision 4 (nach Rückmeldung von Markus Goetz)
 

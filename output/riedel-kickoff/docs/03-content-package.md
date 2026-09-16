@@ -530,8 +530,7 @@ Karte (Deep Blue) mit der expliziten offenen Frage an den CTO, darunter der näc
 Abschlussfolie mit drei Bitten (nicht Forderungen) an RIEDEL, einer hervorgehobenen offenen Frage
 an den CTO nach seiner eigenen Einschätzung, und dem nächsten Fixtermin Checkpoint 1.
 
-**Offener Punkt für Markus Goetz:** Die Frage, ob dieser einladende "Was brauchen wir von Ihnen /
-was ist Ihre Sicht"-Moment stattdessen — im Sinne des pyramidalen Prinzips — bereits ganz an den
-Anfang des Decks gehört, ist noch nicht entschieden. Aktuell bleibt er als Closing stehen; eine
-Verschiebung nach vorne wäre eine Storyline-Änderung (neuer Slide-Index) und wurde bewusst nicht
-ohne Rückfrage umgesetzt.
+**Entschieden (Markus Goetz):** Der einladende "Was brauchen wir von Ihnen / was ist Ihre
+Sicht"-Moment bleibt bewusst am Ende (Closing), nicht am Anfang des Decks — passt besser zur
+klassischen Kickoff-Dramaturgie: erst Kontext und Fahrplan aufbauen, dann am Schluss um
+Mitwirkung und Einschätzung bitten. Keine Storyline-Änderung nötig.
