@@ -1,6 +1,26 @@
 # Design Delivery Report — RIEDEL Networks Kickoff-Deck
 
-**Project:** `riedel-kickoff` · **Phase:** 5 (Design) · **Status:** Build complete, passed validation (Revision 3)
+**Project:** `riedel-kickoff` · **Phase:** 5 (Design) · **Status:** Build complete, passed validation (Revision 4)
+
+## Revision 4 (nach Rückmeldung von Markus Goetz)
+
+Folie 9 hatte einen echten Inhaltsfehler, nicht nur ein Layout-Problem: die Headline kündigte
+"drei abhängigen Schritten" an, das Diagramm zeigte aber fünf optisch gleichrangige Prozessboxen.
+Ursache: die Content-Package-Bullets hatten 1:1 die fünf Arbeitspakete aus dem Quelldokument
+übernommen, statt sie auf die drei in der Storyline definierten Makro-Schritte zu verdichten.
+
+Korrektur: drei **Chevron-Phasen** (Scope & Vorbereitung / Interviews & Prozessprüfung /
+Use-Case-Longlist & Scoring), jede mit ihren 1–2 zugehörigen Arbeitspaketen als Unterpunkte in
+einer Karte darunter — Muster "Chevron-Prozess mit Aktivitäts-Detail je Phase", bestätigt durch
+Kurzrecherche zu Chevron-Diagrammen (Quelle: PresentationGo/SlideModel Chevron-Templates: Pfeile
+transportieren die feste Reihenfolge, eine Aktivitäts-Matrix direkt unter jeder Phase verknüpft
+Aufgaben eindeutig mit ihrer Phase). Passend zur Storyline, da G2 (Baustein 2) als **deduktiv**
+getaggt ist — anders als Folie 6 (induktiv/parallel, daher Hub-and-Spoke ohne Pfeile).
+
+Die "Gemeinsame Fokusbereich-Auswahl" ist jetzt kein vierter Schritt mehr auf dieser Folie,
+sondern ein Ergebnis-Hinweis, der auf den gemeinsamen Checkpoint (Folie 14) verweist — deckungsgleich
+mit der Storyline, in der G2 exakt die `slide_id`s 9–11 umfasst und die Checkpoint-Entscheidung zu
+G3 gehört.
 
 ## Revision 3 (nach Rückmeldung von Markus Goetz)
 

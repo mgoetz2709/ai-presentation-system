@@ -501,7 +501,9 @@ const NOTES_PREFIX = '';
 })();
 
 // ============================================================
-// Slide 9 — PROCESS (Baustein 2 Fahrplan, 5 stations)
+// Slide 9 — PROCESS (Baustein 2 Fahrplan: 3 chevron phases, each with its
+// underlying work packages listed in a card beneath it — deduktiv, so the
+// arrow shape reinforces the fixed sequence, unlike Folie 6's hub-and-spoke)
 // ============================================================
 (function buildSlide9() {
   const slide = pres.addSlide();
@@ -509,25 +511,52 @@ const NOTES_PREFIX = '';
   addHeaderBar(slide, ShapeType);
   addHeadline(slide, 'Baustein 2 macht die Discovery in drei abhängigen Schritten\nvon der Bereichsliste bis zur Use-Case-Longlist steuerbar', { fontSize: 21 });
 
-  const stations = [
-    ['Scope-Bestätigung', 'Teil Kickoff'],
-    ['Interview-Vorbereitung', '23.9.–3.10.'],
-    ['Interviews &\nProzessprüfung', '6.10.–24.10.'],
-    ['Use-Case-Longlist &\nScoring', '27.10.–7.11.'],
-    ['Gemeinsame\nFokusbereich-Auswahl', 'Woche 9.–13.11.'],
+  addSourceLine(slide, 'Die übergreifenden Setup-Arbeitspakete (Kickoff, Anforderungserhebung, Risiko-Log) sind bereits in Baustein 1 abgedeckt und gelten für beide Bausteine gemeinsam.', CONTENT_X, CONTENT_TOP, CONTENT_W);
+
+  const phases = [
+    {
+      title: 'Scope &\nVorbereitung', date: '21.9.–3.10.',
+      items: ['Scope-Bestätigung (Teil Kickoff): Bereichsliste + Ansprechpartner bestätigt', 'Interview-Vorbereitung (23.9.–3.10.): Leitfaden + Terminplanung'],
+    },
+    {
+      title: 'Interviews &\nProzessprüfung', date: '6.10.–24.10.',
+      items: ['Interviews mit Prozessverantwortlichen, exemplarisch je Bereich', 'Parallel: Auswertung Ist-Prozessdokumentation & Tool-Umgebung inkl. NOC-Ablaufpläne'],
+    },
+    {
+      title: 'Use-Case-Longlist\n& Scoring', date: '27.10.–7.11.',
+      items: ['Longlist über alle Bereiche + Opportunity Scoring (Wirkung × Automatisierbarkeit × Datenverfügbarkeit)', 'Ergebnis fließt in die gemeinsame Fokusbereich-Auswahl am Checkpoint 1'],
+    },
   ];
-  const boxW = (CONTENT_W - 4 * 0.3) / 5;
-  const boxH = 1.6, rowY = CONTENT_TOP + 1.5;
-  stations.forEach((s, i) => {
-    const x = CONTENT_X + i * (boxW + 0.3);
-    if (i > 0) addConnector(slide, x - 0.3, rowY + boxH / 2, 0.3);
-    addProcessBox(slide, x, rowY, boxW, boxH, s[0], s[1]);
+
+  const gap = 0.3;
+  const chevW = (CONTENT_W - 2 * gap) / 3;
+  const chevY = CONTENT_TOP + 0.45, chevH = 0.9;
+  const cardY = chevY + chevH + 0.2, cardH = 2.5;
+
+  phases.forEach((p, i) => {
+    const x = CONTENT_X + i * (chevW + gap);
+    slide.addShape(ShapeType.chevron, {
+      x, y: chevY, w: chevW, h: chevH, fill: { color: C.blue }, line: { color: C.blue },
+    });
+    slide.addText(p.title, {
+      x: x + 0.15, y: chevY + 0.08, w: chevW - 0.3, h: 0.55, fontSize: 12.5, bold: true, color: C.white,
+      fontFace: 'Arial', align: 'center', valign: 'middle', margin: 0, lineSpacingMultiple: 1.05,
+    });
+    slide.addText(p.date, {
+      x: x + 0.15, y: chevY + chevH - 0.32, w: chevW - 0.3, h: 0.28, fontSize: 9.5, color: C.white,
+      fontFace: 'Arial', align: 'center', valign: 'middle', margin: 0,
+    });
+
+    addCard(slide, ShapeType, x, cardY, chevW, cardH, C.offwht, C.midgrey, 0.08);
+    addBulletBlock(slide, p.items, x + 0.2, cardY + 0.2, chevW - 0.4, cardH - 0.4, { fontSize: 10.5 });
   });
 
-  addInsightBox(slide, ShapeType, 'Die übergreifenden Setup-Arbeitspakete (Kickoff, Anforderungserhebung, Risiko-Log) sind bereits in Baustein 1 abgedeckt und gelten für beide Bausteine gemeinsam.', CONTENT_X, CONTENT_TOP + 0.0, CONTENT_W, 0.85);
+  addInsightBox(slide, ShapeType,
+    'Am Checkpoint 1 (Woche 9.–13.11.) entscheiden Axel Wehrle/GF gemeinsam mit MGIM anhand dieser Longlist über den Fokusbereich für den Umsetzungsstart — siehe Folie 14.',
+    CONTENT_X, cardY + cardH + 0.2, CONTENT_W, 0.6);
 
   addFooter(slide);
-  slide.addNotes('Auch Baustein 2 ist kein offener Suchprozess, sondern eine feste Kette. Wir starten direkt beim Kickoff mit der Bestätigung der Bereichsliste und der Ansprechpartner, bereiten strukturierte Interviews vor, führen sie durch und werten parallel die vorhandene Prozessdokumentation aus, bauen daraus eine Longlist mit Opportunity Scoring — und am Checkpoint entscheiden Sie gemeinsam mit Axel Wehrle, welcher Fokusbereich als Erstes umgesetzt wird.');
+  slide.addNotes('Auch Baustein 2 ist kein offener Suchprozess, sondern eine feste Kette von drei Schritten. Wir starten direkt beim Kickoff mit der Bestätigung der Bereichsliste und der Interview-Vorbereitung, führen dann die Interviews durch und werten parallel die vorhandene Prozessdokumentation aus, und bauen daraus eine Longlist mit Opportunity Scoring. Das Ergebnis dieser drei Schritte ist die Grundlage für die gemeinsame Fokusbereich-Auswahl, die dann am Checkpoint mit Axel Wehrle und der Geschäftsführung getroffen wird — das ist bewusst kein vierter Schritt von Baustein 2 selbst, sondern der gemeinsame Entscheidungspunkt, den wir auf der Checkpoint-Folie noch einmal im Detail zeigen.');
 })();
 
 // ============================================================

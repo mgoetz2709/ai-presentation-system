@@ -277,26 +277,50 @@ Positionierung und Relevanz für RIEDEL.
 
 ## Slide 9: Baustein 2 macht die Discovery in drei abhängigen Schritten von der Bereichsliste bis zur Use-Case-Longlist steuerbar
 
-**Bullets**
-- Scope-Bestätigung (Teil Kickoff): Axel Wehrle bestätigt Bereichsliste + benennt Ansprechpartner je Bereich
-- Interview-Vorbereitung (23.9.–3.10.): Leitfaden + Terminplanung je Bereich
-- Interviews & Prozessprüfung (6.10.–24.10.): exemplarische Interviews + Auswertung vorhandener Prozessdokumentation
-- Use-Case-Longlist & Opportunity Scoring (27.10.–7.11.): vergleichbare Bewertung über alle Bereiche
-- Gemeinsame Fokusbereich-Auswahl beim Checkpoint (Woche 9.–13.11.)
+**Design-Hinweis (Revision 4, nach Rückmeldung von Markus Goetz):** Die ursprüngliche Fassung
+zeigte fünf optisch gleichrangige Prozessboxen, obwohl die Headline "drei abhängigen Schritten"
+ankündigt — ein echter Inhaltsfehler (Headline vs. Visual widersprachen sich), nicht nur ein
+Layout-Wunsch. Korrektur: die fünf Arbeitspakete werden zu **drei** Schritten gruppiert (Chevron/
+Pfeil-Phasen, da Baustein 2 laut Storyline deduktiv/sequenziell ist), mit den zugehörigen
+Arbeitspaketen jeweils als Unterpunkte in einer Karte darunter — Muster "Chevron-Prozess mit
+Aktivitäts-Detail je Phase" (bestätigt durch Kurzrecherche zu Chevron-Prozessgrafiken). Die
+"Gemeinsame Fokusbereich-Auswahl" ist bewusst **kein** vierter Schritt von Baustein 2 mehr,
+sondern wird als Ergebnis-Verweis auf den gemeinsamen Checkpoint (Folie 14) angehängt — passend
+zur Storyline, in der G2 exakt die `slide_id`s 9–11 umfasst und die Checkpoint-Entscheidung
+Teil von G3 ist.
+
+**Bullets / Diagramm-Inhalt (3 Phasen, je mit Unterpunkten)**
+- **Phase 1 — Scope & Vorbereitung** (21.9.–3.10.):
+  - Scope-Bestätigung (Teil Kickoff): Bereichsliste + Ansprechpartner bestätigt
+  - Interview-Vorbereitung (23.9.–3.10.): Leitfaden + Terminplanung
+- **Phase 2 — Interviews & Prozessprüfung** (6.10.–24.10.):
+  - Interviews mit Prozessverantwortlichen, exemplarisch je Bereich
+  - Parallel: Auswertung Ist-Prozessdokumentation & Tool-Umgebung inkl. NOC-Ablaufpläne
+- **Phase 3 — Use-Case-Longlist & Scoring** (27.10.–7.11.):
+  - Longlist über alle Bereiche + Opportunity Scoring (Wirkung × Automatisierbarkeit × Datenverfügbarkeit)
+  - Ergebnis fließt in die gemeinsame Fokusbereich-Auswahl am Checkpoint 1
+- Fußnote: Am Checkpoint 1 (Woche 9.–13.11.) entscheiden Axel Wehrle/GF gemeinsam mit MGIM anhand dieser Longlist über den Fokusbereich für den Umsetzungsstart — siehe Folie 14
 
 **Speaker Notes**
-Auch Baustein 2 ist kein offener Suchprozess, sondern eine feste Kette. Wir starten direkt beim
-Kickoff mit der Bestätigung der Bereichsliste und der Ansprechpartner, bereiten strukturierte
-Interviews vor, führen sie durch und werten parallel die vorhandene Prozessdokumentation aus,
-bauen daraus eine Longlist mit Opportunity Scoring — und am Checkpoint entscheiden Sie gemeinsam
-mit Axel Wehrle, welcher Fokusbereich als Erstes umgesetzt wird.
+Auch Baustein 2 ist kein offener Suchprozess, sondern eine feste Kette von drei Schritten. Wir
+starten direkt beim Kickoff mit der Bestätigung der Bereichsliste und der Interview-Vorbereitung,
+führen dann die Interviews durch und werten parallel die vorhandene Prozessdokumentation aus, und
+bauen daraus eine Longlist mit Opportunity Scoring. Das Ergebnis dieser drei Schritte ist die
+Grundlage für die gemeinsame Fokusbereich-Auswahl, die dann am Checkpoint mit Axel Wehrle und der
+Geschäftsführung getroffen wird — das ist bewusst kein vierter Schritt von Baustein 2 selbst,
+sondern der gemeinsame Entscheidungspunkt, den wir auf der Checkpoint-Folie noch einmal im Detail
+zeigen.
 
 **Visual Spec**
-PROCESS/TIMELINE-Slide, fünf Stationen horizontal mit Zeiträumen.
+PROCESS-Slide, drei Chevron-Pfeile (MG Blue, weiße Schrift) nebeneinander, jeder mit Phasentitel +
+Zeitraum; darunter je eine Karte mit den 1–2 zugehörigen Arbeitspaketen als Unterpunkte. Am
+unteren Rand ein Insight-Hinweis, der auf die Checkpoint-Entscheidung (Folie 14) verweist, statt
+sie als vierte Box in dieser Kette zu zeigen.
 
 **Alt-Text**
-Horizontale Prozessgrafik mit fünf Stationen von Scope-Bestätigung bis gemeinsamer
-Fokusbereich-Auswahl am Checkpoint.
+Drei Pfeil-Phasen (Scope & Vorbereitung, Interviews & Prozessprüfung, Use-Case-Longlist & Scoring)
+mit den jeweiligen Arbeitspaketen darunter, sowie ein Hinweis, dass das Ergebnis in die
+Fokusbereich-Auswahl am Checkpoint 1 einfließt.
 
 ---
 
