@@ -83,6 +83,57 @@ function addConnector(slide, x, y, w) {
   slide.addShape(ShapeType.rect, { x, y, w, h: 0.03, fill: { color: C.midgrey }, line: { color: C.midgrey } });
 }
 
+// Straight line between two arbitrary points — pptxgenjs draws a line shape along one of the two
+// diagonals of its (x,y,w,h) bounding box; flipV picks which diagonal. Used for hub-and-spoke
+// connectors, where every spoke sits at a different angle.
+function addRadialLine(slide, x1, y1, x2, y2, color, width) {
+  const sameSign = (x1 <= x2) === (y1 <= y2);
+  slide.addShape(ShapeType.line, {
+    x: Math.min(x1, x2), y: Math.min(y1, y2), w: Math.abs(x2 - x1), h: Math.abs(y2 - y1),
+    line: { color, width }, flipV: !sameSign,
+  });
+}
+
+// Hub-and-spoke diagram: one center node, N satellite nodes evenly spaced on a circle around it,
+// connected by radial lines. Used where several independent, parallel building blocks all feed
+// one central decision (no sequence implied — see brand-guide "Grey anchors, Blue activates").
+function addHubAndSpoke(slide, cx, cy, hubR, spokeR, orbitR, hubLabel, spokes) {
+  const n = spokes.length;
+  const startAngleDeg = 90;
+  const points = spokes.map((label, i) => {
+    const angleDeg = startAngleDeg - i * (360 / n);
+    const rad = (angleDeg * Math.PI) / 180;
+    const dx = Math.cos(rad), dy = -Math.sin(rad);
+    return { label, dx, dy, x: cx + dx * orbitR, y: cy + dy * orbitR };
+  });
+
+  points.forEach((p) => {
+    const startX = cx + p.dx * hubR, startY = cy + p.dy * hubR;
+    const endX = cx + p.dx * (orbitR - spokeR), endY = cy + p.dy * (orbitR - spokeR);
+    addRadialLine(slide, startX, startY, endX, endY, C.midgrey, 1.5);
+  });
+
+  slide.addShape(ShapeType.ellipse, {
+    x: cx - hubR, y: cy - hubR, w: hubR * 2, h: hubR * 2,
+    fill: { color: C.blue }, line: { color: C.blue },
+  });
+  slide.addText(hubLabel, {
+    x: cx - hubR, y: cy - hubR, w: hubR * 2, h: hubR * 2, fontSize: 13, bold: true, color: C.white,
+    fontFace: 'Arial', align: 'center', valign: 'middle', margin: 0, lineSpacingMultiple: 1.1,
+  });
+
+  points.forEach((p) => {
+    slide.addShape(ShapeType.ellipse, {
+      x: p.x - spokeR, y: p.y - spokeR, w: spokeR * 2, h: spokeR * 2,
+      fill: { color: C.white }, line: { color: C.blue, width: 2 },
+    });
+    slide.addText(p.label, {
+      x: p.x - spokeR, y: p.y - spokeR, w: spokeR * 2, h: spokeR * 2, fontSize: 10.5, bold: true,
+      color: C.grey, fontFace: 'Arial', align: 'center', valign: 'middle', margin: 0, lineSpacingMultiple: 1.05,
+    });
+  });
+}
+
 const NOTES_PREFIX = '';
 
 // ============================================================
@@ -318,7 +369,7 @@ const NOTES_PREFIX = '';
 })();
 
 // ============================================================
-// Slide 6 — STAT/CONTENT (Anforderungen & Leitplanken, 5-icon grid)
+// Slide 6 — PROCESS/Framework (Anforderungen & Leitplanken, hub-and-spoke)
 // ============================================================
 (function buildSlide6() {
   const slide = pres.addSlide();
@@ -326,31 +377,49 @@ const NOTES_PREFIX = '';
   addHeaderBar(slide, ShapeType);
   addHeadline(slide, 'Erst eine gemeinsame Fakten- und Leitplankenbasis macht\nspätere Architekturentscheidungen belastbar', { fontSize: 22 });
 
-  const dims = ['Datenklassi-\nfizierung/-räume', 'Zugriff /\nRollen', 'Audit /\nLogging', 'Verfügbarkeit /\nLatenz', 'Human-in-\nthe-Loop'];
-  const boxW5 = (CONTENT_W - 4 * 0.3) / 5;
-  const y5 = CONTENT_TOP + 0.1;
-  dims.forEach((d, i) => {
-    const x = CONTENT_X + i * (boxW5 + 0.3);
-    addCard(slide, ShapeType, x, y5, boxW5, 1.3, C.white, C.blue, 0.1);
-    slide.addText(d, {
-      x: x + 0.1, y: y5 + 0.15, w: boxW5 - 0.2, h: 1.0, fontSize: 11, bold: true, color: C.grey,
-      fontFace: 'Arial', align: 'center', valign: 'middle', margin: 0, lineSpacingMultiple: 1.1,
-    });
-  });
-  slide.addText('KI-Leitplanken & Betriebsanforderungen (Entwurf bis 6.10., CISO/DSB-Kommentierung bis 10.10.)', {
-    x: CONTENT_X, y: y5 + 1.4, w: CONTENT_W, h: 0.3, fontSize: 11, italic: true, color: C.midgrey,
-    fontFace: 'Arial', align: 'left', margin: 0,
+  const diagCx = CONTENT_X + 3.9, diagCy = CONTENT_TOP + 2.6;
+  addHubAndSpoke(slide, diagCx, diagCy, 0.75, 0.65, 1.75, 'Architektur-\nentscheidung', [
+    'Datenklassi-\nfizierung/-räume',
+    'Zugriff /\nRollen',
+    'Audit /\nLogging',
+    'Verfügbarkeit /\nLatenz',
+    'Human-in-\nthe-Loop',
+  ]);
+
+  const legendX = CONTENT_X + 8.1, legendW = CONTENT_X + CONTENT_W - legendX;
+  slide.addText('KI-Leitplanken & Betriebsanforderungen — fünf Bausteine, die gemeinsam die Architekturentscheidung tragen:', {
+    x: legendX, y: CONTENT_TOP + 0.05, w: legendW, h: 0.55, fontSize: 11, bold: true, color: C.grey,
+    fontFace: 'Arial', align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.15,
   });
 
-  const bullets = [
-    'Anforderungserhebung (23.9.–3.10.): Client-IT liefert Systemübersicht + Ansprechpartner bis 26.9.; MGIM liefert strukturierte Aufnahme bis 3.10.',
-    'CISO/DSB kommentieren den Leitplanken-Entwurf bis 10.10.',
-    'Risiko- und Abhängigkeitslog läuft ab 3.10. parallel und laufend — macht Verzögerungsrisiken früh sichtbar.',
+  const legendItems = [
+    ['Datenklassifizierung/-räume', 'Was darf wohin (RAG/Fine-Tuning ja/nein)?'],
+    ['Zugriff / Rollen', 'Wer darf worauf zugreifen?'],
+    ['Audit / Logging', 'Wer hat wann was gemacht?'],
+    ['Verfügbarkeit / Latenz', 'Wie schnell und wie stabil muss es laufen?'],
+    ['Human-in-the-Loop', 'Wo entscheidet zwingend ein Mensch mit?'],
   ];
-  addBulletBlock(slide, bullets, CONTENT_X, y5 + 1.9, CONTENT_W, 1.6, { fontSize: 13 });
+  let legendY = CONTENT_TOP + 0.65;
+  legendItems.forEach((item) => {
+    slide.addShape(ShapeType.rect, { x: legendX, y: legendY + 0.05, w: 0.12, h: 0.12, fill: { color: C.blue }, line: { color: C.blue } });
+    slide.addText(
+      [
+        { text: item[0], options: { bold: true, color: C.grey, breakLine: true } },
+        { text: item[1], options: { color: C.midgrey } },
+      ],
+      {
+        x: legendX + 0.25, y: legendY - 0.08, w: legendW - 0.25, h: 0.6, fontSize: 10.5,
+        fontFace: 'Arial', align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.15,
+      }
+    );
+    legendY += 0.72;
+  });
+
+  slide.addShape(ShapeType.rect, { x: legendX, y: legendY + 0.05, w: legendW, h: 0.02, fill: { color: C.ltgrey }, line: { color: C.ltgrey } });
+  addSourceLine(slide, 'Entwurf bis 6.10., CISO/DSB-Kommentierung bis 10.10. Risiko-/Abhängigkeitslog läuft ab 3.10. parallel und laufend.', legendX, legendY + 0.2, legendW);
 
   addFooter(slide);
-  slide.addNotes('Jede spätere technische Entscheidung wird an diesen Leitplanken gemessen — deshalb kommen sie so früh in der Phase. Wir brauchen zunächst eine gemeinsame Faktenbasis zu Ihrer IT-Landschaft, Ihren Datenquellen und Integrationspunkten. Parallel entwerfen wir die Betriebsleitplanken über fünf Dimensionen: Datenklassifizierung, Zugriff und Rollen, Audit und Logging, Verfügbarkeit und Latenz, und Human-in-the-Loop. CISO und Datenschutzbeauftragter kommentieren diesen Entwurf, bevor er verbindlich wird. Und ab dem 3.10. läuft das Risiko-Log mit — damit wir Verzögerungen sehen, bevor sie zum Problem werden, nicht erst danach.');
+  slide.addNotes('Jede spätere technische Entscheidung wird an diesen Leitplanken gemessen — deshalb kommen sie so früh in der Phase. Fünf Bausteine müssen dafür erarbeitet werden, und sie stehen bewusst gleichberechtigt nebeneinander, nicht in einer Reihenfolge: Datenklassifizierung, Zugriff und Rollen, Audit und Logging, Verfügbarkeit und Latenz, und Human-in-the-Loop. Erst wenn alle fünf stehen, ist die Architekturentscheidung wirklich belastbar. CISO und Datenschutzbeauftragter kommentieren den Entwurf, bevor er verbindlich wird. Und ab dem 3.10. läuft das Risiko-Log mit — damit wir Verzögerungen sehen, bevor sie zum Problem werden, nicht erst danach.');
 })();
 
 // ============================================================

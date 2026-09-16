@@ -179,29 +179,45 @@ Fine-Tuning/LoRA erklärt.
 
 ## Slide 6: Erst eine gemeinsame Fakten- und Leitplankenbasis macht spätere Architekturentscheidungen belastbar
 
-**Bullets**
-- Anforderungserhebung (23.9.–3.10.): Client-IT liefert Systemübersicht + Ansprechpartner bis 26.9.; MGIM liefert strukturierte Aufnahme bis 3.10.
-- KI-Leitplanken-Entwurf (bis 6.10.): Datenklassifizierung/-räume, Zugriff/Rollen, Audit/Logging, Verfügbarkeit/Latenz, Human-in-the-Loop
-- CISO/DSB kommentieren den Entwurf bis 10.10.
-- Risiko- und Abhängigkeitslog läuft ab 3.10. parallel und laufend — macht Verzögerungsrisiken früh sichtbar
+**Design-Hinweis (Revision 3, nach Rückmeldung von Markus Goetz):** von einem 5-Kacheln-Raster auf
+ein Hub-and-Spoke-Diagramm umgestellt, um zu zeigen, dass die fünf Leitplanken-Bausteine
+gleichberechtigt und parallel erarbeitet werden und gemeinsam auf eine zentrale
+Architekturentscheidung einzahlen — keine implizite Reihenfolge, kein Ranking. Recherche zu
+Hub-and-Spoke-/Radialdiagrammen bestätigt: 3–6 Spokes optimal (hier 5), kurze Labels im Kreis,
+ausführlichere Erklärung außerhalb (hier als Legende rechts), Farbdifferenzierung zwischen
+Zentrum und Satelliten passend zum Farbsystem.
+
+**Bullets / Diagramm-Inhalt**
+- Zentrum: "Architekturentscheidung" (MG Blue, das eine Element, auf das der Blick fällt)
+- 5 gleichberechtigte Bausteine (Kreise um das Zentrum, radial verbunden):
+  - Datenklassifizierung/-räume — Was darf wohin (RAG/Fine-Tuning ja/nein)?
+  - Zugriff / Rollen — Wer darf worauf zugreifen?
+  - Audit / Logging — Wer hat wann was gemacht?
+  - Verfügbarkeit / Latenz — Wie schnell und wie stabil muss es laufen?
+  - Human-in-the-Loop — Wo entscheidet zwingend ein Mensch mit?
+- Fußnote: Entwurf bis 6.10., CISO/DSB-Kommentierung bis 10.10.; Risiko-/Abhängigkeitslog läuft ab 3.10. parallel und laufend
 
 **Speaker Notes**
 Jede spätere technische Entscheidung wird an diesen Leitplanken gemessen — deshalb kommen sie so
-früh in der Phase. Wir brauchen zunächst eine gemeinsame Faktenbasis zu Ihrer IT-Landschaft, Ihren
-Datenquellen und Integrationspunkten. Parallel entwerfen wir die Betriebsleitplanken über fünf
-Dimensionen: Datenklassifizierung, Zugriff und Rollen, Audit und Logging, Verfügbarkeit und
-Latenz, und Human-in-the-Loop. CISO und Datenschutzbeauftragter kommentieren diesen Entwurf, bevor
-er verbindlich wird. Und ab dem 3.10. läuft das Risiko-Log mit — damit wir Verzögerungen sehen,
-bevor sie zum Problem werden, nicht erst danach.
+früh in der Phase. Fünf Bausteine müssen dafür erarbeitet werden, und sie stehen bewusst
+gleichberechtigt nebeneinander, nicht in einer Reihenfolge: Datenklassifizierung, Zugriff und
+Rollen, Audit und Logging, Verfügbarkeit und Latenz, und Human-in-the-Loop. Erst wenn alle fünf
+stehen, ist die Architekturentscheidung wirklich belastbar. CISO und Datenschutzbeauftragter
+kommentieren den Entwurf, bevor er verbindlich wird. Und ab dem 3.10. läuft das Risiko-Log mit —
+damit wir Verzögerungen sehen, bevor sie zum Problem werden, nicht erst danach.
 
 **Visual Spec**
-STAT/CONTENT-Slide mit Icon-Grid der fünf Leitplanken-Dimensionen (Datenklassifizierung,
-Zugriff/Rollen, Audit/Logging, Verfügbarkeit/Latenz, Human-in-the-Loop) als fünf kompakte Kacheln,
-darunter die Termin-Bullets zu Anforderungserhebung und Kommentierung.
+PROCESS/Framework-Slide, Hub-and-Spoke-Diagramm links (~60% Breite): zentraler Kreis
+"Architekturentscheidung" (MG Blue, weiße Schrift), fünf gleich große Satelliten-Kreise
+radial angeordnet (weiß mit blauer Kontur, graue Schrift, kurzes Label), verbunden mit dünnen
+grauen Radiallinien zum Zentrum — keine Pfeile, keine implizite Reihenfolge. Rechts (~35% Breite)
+Legende: pro Baustein ein blaues Quadrat + fetter Kurzlabel + eine Zeile Erläuterung, darunter
+Fußnote mit den Terminen.
 
 **Alt-Text**
-Fünf-Kacheln-Raster der KI-Leitplanken-Dimensionen, darunter Termine zu Anforderungserhebung und
-CISO/DSB-Kommentierung.
+Hub-and-Spoke-Diagramm: zentraler Kreis "Architekturentscheidung", umgeben von fünf gleichwertigen
+Bausteinen (Datenklassifizierung, Zugriff/Rollen, Audit/Logging, Verfügbarkeit/Latenz,
+Human-in-the-Loop), rechts daneben eine Legende mit Kurzerläuterung je Baustein.
 
 ---
 

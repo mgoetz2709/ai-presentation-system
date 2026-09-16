@@ -1,6 +1,32 @@
 # Design Delivery Report — RIEDEL Networks Kickoff-Deck
 
-**Project:** `riedel-kickoff` · **Phase:** 5 (Design) · **Status:** Build complete, passed validation (Revision 2)
+**Project:** `riedel-kickoff` · **Phase:** 5 (Design) · **Status:** Build complete, passed validation (Revision 3)
+
+## Revision 3 (nach Rückmeldung von Markus Goetz)
+
+Folie 6 von einem 5-Kacheln-Raster auf ein **Hub-and-Spoke-Diagramm** umgestellt: ein zentraler
+Kreis "Architekturentscheidung" (MG Blue), umgeben von fünf gleichberechtigten, radial verbundenen
+Bausteinen (Datenklassifizierung/-räume, Zugriff/Rollen, Audit/Logging, Verfügbarkeit/Latenz,
+Human-in-the-Loop). Rechts daneben eine Legende mit einer Kurzerläuterung je Baustein.
+
+Kurzrecherche zu Hub-and-Spoke-/Radialdiagrammen (Quellen: Bricks, "How to Create a Hub and Spoke
+Diagram in PowerPoint"; PresentationGo Radial-Diagram-Templates) bestätigt die hier gewählte
+Umsetzung:
+- 3–6 Spokes gelten als optimal, um die Grafik nicht zu überladen — hier exakt 5.
+- Kurze, prägnante Labels gehören in die Kreise; ausführlichere Erklärungen gehören nach außen,
+  wenn sie nicht in den Kreis passen — hier als Legende rechts statt radial verteilter Callouts
+  gelöst, da bei 5 Spokes und begrenzter Folienhöhe außen liegende Radial-Callouts zu eng am
+  Folienrand geraten wären.
+- Farbdifferenzierung zwischen Zentrum und Satelliten macht die Struktur lesbar — hier
+  CI-konform umgesetzt: Zentrum (das eine Element, auf das der Blick fällt) in MG Blue, die fünf
+  Bausteine in Grau/Weiß mit blauer Kontur ("Grey anchors, Blue activates").
+- Ein Hub-and-Spoke-Layout impliziert bewusst **keine** Reihenfolge — passend, weil die fünf
+  Leitplanken-Bausteine tatsächlich parallel erarbeitet werden, nicht sequenziell.
+
+Neuer Helper `addHubAndSpoke()` (plus `addRadialLine()` für die winkelgenauen Verbindungslinien)
+in `build/presentation.js` — projektlokal, da dieses Layout bislang nicht in
+`lib/pptx-helpers.js` vorhanden war; bei Bedarf für ein künftiges Projekt in die gemeinsame
+Bibliothek heben.
 
 ## Revision 2 (nach Rückmeldung von Markus Goetz)
 
