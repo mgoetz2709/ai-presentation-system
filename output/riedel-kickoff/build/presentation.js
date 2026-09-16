@@ -50,14 +50,13 @@ function addSourceLine(slide, text, x, y, w) {
 }
 
 // Bulleted text block, MECE list rendering — used for CONTENT-type slides.
+// Each item needs its own breakLine, otherwise pptxgenjs treats the whole array as one paragraph
+// (one bullet glyph, all items run together with no line break) — this bit for real on several
+// slides before it was caught.
 function addBulletBlock(slide, items, x, y, w, h, opts) {
   const o = opts || {};
-  const bullets = items.map((t) => ({
-    text: t,
-    options: { bullet: { code: '2022', indent: 18 }, color: C.blue, bold: true },
-  }));
   slide.addText(
-    items.map((t) => ({ text: t, options: { color: C.black, bullet: { code: '2022' } } })),
+    items.map((t, i) => ({ text: t, options: { color: C.black, bullet: { code: '2022' }, breakLine: i < items.length - 1 } })),
     {
       x, y, w, h, fontSize: o.fontSize || 14, color: C.black, fontFace: 'Arial',
       align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.25,
@@ -387,36 +386,34 @@ const NOTES_PREFIX = '';
   ]);
 
   const legendX = CONTENT_X + 8.1, legendW = CONTENT_X + CONTENT_W - legendX;
-  slide.addText('KI-Leitplanken & Betriebsanforderungen — fünf Bausteine, die gemeinsam die Architekturentscheidung tragen:', {
-    x: legendX, y: CONTENT_TOP + 0.05, w: legendW, h: 0.55, fontSize: 11, bold: true, color: C.grey,
+  slide.addText('Fünf Bausteine, die gemeinsam die Architekturentscheidung tragen:', {
+    x: legendX, y: CONTENT_TOP + 0.05, w: legendW, h: 0.4, fontSize: 11, bold: true, color: C.grey,
     fontFace: 'Arial', align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.15,
   });
 
-  const legendItems = [
-    ['Datenklassifizierung/-räume', 'Was darf wohin (RAG/Fine-Tuning ja/nein)?'],
-    ['Zugriff / Rollen', 'Wer darf worauf zugreifen?'],
-    ['Audit / Logging', 'Wer hat wann was gemacht?'],
-    ['Verfügbarkeit / Latenz', 'Wie schnell und wie stabil muss es laufen?'],
-    ['Human-in-the-Loop', 'Wo entscheidet zwingend ein Mensch mit?'],
+  const legendRows = [
+    ['Baustein', 'Nutzen'],
+    ['Datenklassifizierung/-räume\n(Was darf wohin?)', 'Verhindert Compliance-Nacharbeit später'],
+    ['Zugriff / Rollen\n(Wer darf worauf zu?)', 'Kontrollierter Zugriff ab Tag 1, kein Berechtigungschaos'],
+    ['Audit / Logging\n(Wer hat was gemacht?)', 'Nachvollziehbarkeit im Ernstfall, Audit-fähig'],
+    ['Verfügbarkeit / Latenz\n(Wie schnell, wie stabil?)', 'Realistische SLAs statt späterer Betriebsüberraschungen'],
+    ['Human-in-the-Loop\n(Wo entscheidet der Mensch?)', 'Vertrauen der Mitarbeitenden, klare Haftungsgrenzen'],
   ];
-  let legendY = CONTENT_TOP + 0.65;
-  legendItems.forEach((item) => {
-    slide.addShape(ShapeType.rect, { x: legendX, y: legendY + 0.05, w: 0.12, h: 0.12, fill: { color: C.blue }, line: { color: C.blue } });
-    slide.addText(
-      [
-        { text: item[0], options: { bold: true, color: C.grey, breakLine: true } },
-        { text: item[1], options: { color: C.midgrey } },
-      ],
-      {
-        x: legendX + 0.25, y: legendY - 0.08, w: legendW - 0.25, h: 0.6, fontSize: 10.5,
-        fontFace: 'Arial', align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.15,
-      }
-    );
-    legendY += 0.72;
+  const legendTableRows = legendRows.map((r, ri) => r.map((cell) => ({
+    text: cell,
+    options: {
+      bold: ri === 0, color: ri === 0 ? C.white : C.black, fill: { color: ri === 0 ? C.grey : (ri % 2 === 0 ? C.white : C.offwht) },
+      fontSize: ri === 0 ? 10 : 9, align: 'left', valign: 'middle', fontFace: 'Arial',
+    },
+  })));
+  slide.addTable(legendTableRows, {
+    x: legendX, y: CONTENT_TOP + 0.5, w: legendW, h: 4.25,
+    colW: [1.95, legendW - 1.95],
+    border: { type: 'solid', color: C.ltgrey, pt: 1 },
+    autoPage: false,
   });
 
-  slide.addShape(ShapeType.rect, { x: legendX, y: legendY + 0.05, w: legendW, h: 0.02, fill: { color: C.ltgrey }, line: { color: C.ltgrey } });
-  addSourceLine(slide, 'Entwurf bis 6.10., CISO/DSB-Kommentierung bis 10.10. Risiko-/Abhängigkeitslog läuft ab 3.10. parallel und laufend.', legendX, legendY + 0.2, legendW);
+  addSourceLine(slide, 'Entwurf bis 6.10., CISO/DSB-Kommentierung bis 10.10. Risiko-/Abhängigkeitslog läuft ab 3.10. parallel und laufend.', legendX, CONTENT_TOP + 4.9, legendW);
 
   addFooter(slide);
   slide.addNotes('Jede spätere technische Entscheidung wird an diesen Leitplanken gemessen — deshalb kommen sie so früh in der Phase. Fünf Bausteine müssen dafür erarbeitet werden, und sie stehen bewusst gleichberechtigt nebeneinander, nicht in einer Reihenfolge: Datenklassifizierung, Zugriff und Rollen, Audit und Logging, Verfügbarkeit und Latenz, und Human-in-the-Loop. Erst wenn alle fünf stehen, ist die Architekturentscheidung wirklich belastbar. CISO und Datenschutzbeauftragter kommentieren den Entwurf, bevor er verbindlich wird. Und ab dem 3.10. läuft das Risiko-Log mit — damit wir Verzögerungen sehen, bevor sie zum Problem werden, nicht erst danach.');
@@ -601,7 +598,8 @@ const NOTES_PREFIX = '';
 })();
 
 // ============================================================
-// Slide 11 — PROCESS/Framework (Opportunity Scoring, 3-axis, no fabricated data)
+// Slide 11 — PROCESS/Framework (Opportunity Scoring: rating scale + labeled
+// illustrative example, not a bare formula — for C-level legibility)
 // ============================================================
 (function buildSlide11() {
   const slide = pres.addSlide();
@@ -609,38 +607,66 @@ const NOTES_PREFIX = '';
   addHeaderBar(slide, ShapeType);
   addHeadline(slide, 'Opportunity Scoring nach Wirkung, Automatisierbarkeit und\nDatenverfügbarkeit macht die Fokusauswahl objektiv', { fontSize: 21 });
 
-  const axes = ['Wirkung', 'Automatisierbarkeit', 'Datenverfügbarkeit'];
-  const y10 = CONTENT_TOP + 0.3;
-  axes.forEach((a, i) => {
-    const x = COL3_X[i];
-    addCard(slide, ShapeType, x, y10, COL3_W, 1.5, C.blue, C.blue, 0.1);
-    slide.addText(a, {
-      x: x + 0.1, y: y10, w: COL3_W - 0.2, h: 1.5, fontSize: 15, bold: true, color: C.white,
-      fontFace: 'Arial', align: 'center', valign: 'middle', margin: 0,
-    });
-    if (i < axes.length - 1) {
-      slide.addText('×', { x: x + COL3_W, y: y10, w: 0.3, h: 1.5, fontSize: 20, bold: true, color: C.grey, fontFace: 'Arial', align: 'center', valign: 'middle' });
-    }
-  });
-  slide.addShape(ShapeType.rect, { x: CONTENT_X, y: y10 + 1.65, w: CONTENT_W, h: 0.03, fill: { color: C.midgrey }, line: { color: C.midgrey } });
-  slide.addText('= Opportunity Score je Use-Case', {
-    x: CONTENT_X, y: y10 + 1.8, w: CONTENT_W, h: 0.4, fontSize: 13, bold: true, italic: true,
-    color: C.grey, fontFace: 'Arial', align: 'center', margin: 0,
+  const scaleRows = [
+    ['Dimension', '1 — gering', '2 — mittel', '3 — hoch'],
+    ['Wirkung', 'Geringe Zeit-/Kostenersparnis', 'Spürbare Verbesserung', 'Signifikanter Hebel bei Zeit, Kosten oder Qualität'],
+    ['Automatisierbarkeit', 'Viele Ausnahmen, stark manuell', 'Teilweise regelbasiert', 'Klar regelbasiert, wenig Ausnahmen'],
+    ['Datenverfügbarkeit', 'Daten verstreut oder unvollständig', 'Teilweise strukturiert vorhanden', 'Strukturiert & zugänglich vorhanden'],
+  ];
+  const scaleTableRows = scaleRows.map((r, ri) => r.map((cell, ci) => ({
+    text: cell,
+    options: {
+      bold: ri === 0 || ci === 0, color: ri === 0 ? C.white : C.black,
+      fill: { color: ri === 0 ? C.grey : (ri % 2 === 0 ? C.offwht : C.white) },
+      fontSize: ri === 0 ? 11 : 10, align: 'left', valign: 'middle', fontFace: 'Arial',
+    },
+  })));
+  const tableY = CONTENT_TOP + 0.1;
+  slide.addTable(scaleTableRows, {
+    x: CONTENT_X, y: tableY, w: CONTENT_W, h: 2.5,
+    colW: [2.4, 3.31, 3.31, 3.31],
+    border: { type: 'solid', color: C.ltgrey, pt: 1 },
+    autoPage: false,
   });
 
-  const bullets = [
-    'Longlist über alle Unternehmensbereiche, MGIM liefert bis 7.11.',
-    'Ergebnis ist vergleichbar, nicht Einzelmeinung — Grundlage für die Fokusbereich-Entscheidung am Checkpoint',
-    'Konkrete Scores entstehen erst im Projektverlauf aus den Interviews — diese Folie zeigt das Bewertungsraster, keine vorweggenommenen Ergebnisse',
-  ];
-  addBulletBlock(slide, bullets, CONTENT_X, y10 + 2.4, CONTENT_W, 1.3, { fontSize: 13 });
+  const formulaY = tableY + 2.7;
+  slide.addText(
+    [
+      { text: 'Score = Wirkung × Automatisierbarkeit × Datenverfügbarkeit  ', options: { bold: true, color: C.grey } },
+      { text: '(max. 27 — höchster Score = höchste Priorität)', options: { italic: true, color: C.midgrey } },
+    ],
+    {
+      x: CONTENT_X, y: formulaY, w: CONTENT_W, h: 0.4, fontSize: 14, fontFace: 'Arial',
+      align: 'center', valign: 'middle', margin: 0,
+    }
+  );
+
+  const exampleY = formulaY + 0.55;
+  addCard(slide, ShapeType, CONTENT_X, exampleY, CONTENT_W, 1.35, C.offwht, C.blue, 0.1);
+  slide.addText('BEISPIELHAFTE ILLUSTRATION — keine reale Bewertung, keine echten Daten', {
+    x: CONTENT_X + 0.25, y: exampleY + 0.12, w: CONTENT_W - 0.5, h: 0.3, fontSize: 9.5, bold: true,
+    color: C.blue, fontFace: 'Arial', align: 'left', margin: 0,
+  });
+  slide.addText(
+    [
+      { text: 'Angenommener Use-Case "Rechnungsprüfung automatisieren": ', options: { color: C.black } },
+      { text: 'Wirkung 3 × Automatisierbarkeit 2 × Datenverfügbarkeit 3 = Score 18 → hohe Priorität für die Fokusbereich-Auswahl.', options: { bold: true, color: C.grey } },
+    ],
+    {
+      x: CONTENT_X + 0.25, y: exampleY + 0.48, w: CONTENT_W - 0.5, h: 0.8, fontSize: 12.5,
+      fontFace: 'Arial', align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.2,
+    }
+  );
+
+  addSourceLine(slide, 'Longlist über alle Unternehmensbereiche, MGIM liefert bis 7.11. Konkrete Scores entstehen erst aus den Interviews und der Prozessprüfung im Oktober — hier gezeigt wird nur das Bewertungsraster.', CONTENT_X, exampleY + 1.5, CONTENT_W);
 
   addFooter(slide);
-  slide.addNotes('Damit die Auswahl des Fokusbereichs am Checkpoint nicht auf Bauchgefühl beruht, bewerten wir jede Idee aus der Longlist nach demselben Raster: Wirkung, Automatisierbarkeit und Datenverfügbarkeit. Das macht unterschiedliche Bereiche — Netzwerkbetrieb, Kundenservice, Projektabwicklung — überhaupt erst vergleichbar. Zur Einordnung: Die konkreten Scores existieren heute noch nicht, sie entstehen aus den Interviews und der Prozessprüfung im Oktober. Was ich Ihnen heute zeige, ist das Raster, nach dem wir bewerten werden.');
+  slide.addNotes('Damit die Auswahl des Fokusbereichs am Checkpoint nicht auf Bauchgefühl beruht, bewerten wir jede Idee aus der Longlist nach demselben Raster, mit einer einfachen Skala von 1 bis 3 je Dimension: Wirkung, Automatisierbarkeit und Datenverfügbarkeit. Multipliziert ergibt das einen Score von maximal 27 — je höher, desto höher die Priorität. Zur Veranschaulichung ein rein angenommenes Beispiel, keine echte Bewertung: Ein Use-Case mit hoher Wirkung, mittlerer Automatisierbarkeit und hoher Datenverfügbarkeit käme auf einen Score von 18. Die tatsächlichen Scores entstehen erst aus den Interviews und der Prozessprüfung im Oktober — was ich Ihnen heute zeige, ist das Raster, nach dem wir bewerten werden.');
 })();
 
 // ============================================================
-// Slide 12 — COMPARISON (Commitments MGIM vs RIEDEL)
+// Slide 12 — TABLE (Commitments MGIM vs RIEDEL, with a blank "Verantwortlich"
+// column for Axel Wehrle to name a name live in the room)
 // ============================================================
 (function buildSlide12() {
   const slide = pres.addSlide();
@@ -648,36 +674,33 @@ const NOTES_PREFIX = '';
   addHeaderBar(slide, ShapeType);
   addHeadline(slide, 'Der Fahrplan funktioniert nur mit klar verteilten Commitments\nauf beiden Seiten — nicht nur MGIM liefert', { fontSize: 21 });
 
-  const colY = CONTENT_TOP + 0.1, colH = 3.5;
-  // Left: MGIM (grey header)
-  slide.addShape(ShapeType.rect, { x: COL2_X[0], y: colY, w: COL2_W, h: 0.5, fill: { color: C.grey }, line: { color: C.grey } });
-  slide.addText('MGIM liefert', { x: COL2_X[0] + 0.15, y: colY, w: COL2_W - 0.3, h: 0.5, fontSize: 14, bold: true, color: C.white, fontFace: 'Arial', align: 'left', valign: 'middle', margin: 0 });
-  addBulletBlock(slide, [
-    'Kickoff-Agenda, strukturierte Anforderungsaufnahme',
-    'Leitplanken-Entwurf, Klassifizierungslogik',
-    'Vorschlagslisten (Pilot-Use-Cases, Vendoren)',
-    'Interview-Leitfaden & -Durchführung',
-    'Longlist + Scoring, Checkpoint-Vorlage',
-  ], COL2_X[0] + 0.15, colY + 0.65, COL2_W - 0.3, colH - 0.7, { fontSize: 12.5 });
+  const rows = [
+    ['Arbeitspaket', 'MGIM liefert', 'RIEDEL liefert', 'Verantwortlich (RIEDEL)'],
+    ['Kickoff & Rollen', 'Kickoff-Agenda', 'Ansprechpartner CISO/DSB/Legal/Fachbereiche', ''],
+    ['Anforderungen & Leitplanken', 'Anforderungsaufnahme, Leitplanken-Entwurf', 'Systemübersicht, Kommentierung der Leitplanken', ''],
+    ['Datenklassifizierung & Pilot-Use-Case', 'Klassifizierungslogik, Vorschlagsliste Use-Cases', 'Dateninventar-Input, Entscheidung Pilot-Use-Case', ''],
+    ['Discovery (Baustein 2)', 'Interview-Leitfaden & -Durchführung', 'Bereichsliste, Ansprechpartner, Interview-Teilnahme, Prozessdokumentation', ''],
+    ['Longlist & Checkpoint', 'Longlist + Scoring, Checkpoint-Vorlage', 'Entscheidung Fokusbereich am Checkpoint', ''],
+  ];
+  const tableRows = rows.map((r, ri) => r.map((cell, ci) => ({
+    text: cell || (ri === 0 ? '' : '_______________'),
+    options: {
+      bold: ri === 0, color: ri === 0 ? C.white : (ci === 3 ? C.midgrey : C.black),
+      fill: { color: ri === 0 ? C.grey : (ri % 2 === 0 ? C.offwht : C.white) },
+      fontSize: ri === 0 ? 11 : 10, align: 'left', valign: 'middle', fontFace: 'Arial',
+    },
+  })));
+  slide.addTable(tableRows, {
+    x: CONTENT_X, y: CONTENT_TOP + 0.1, w: CONTENT_W, h: 3.9,
+    colW: [2.3, 3.5, 4.33, 2.2],
+    border: { type: 'solid', color: C.ltgrey, pt: 1 },
+    autoPage: false,
+  });
 
-  // Right: RIEDEL (blue header)
-  slide.addShape(ShapeType.rect, { x: COL2_X[1], y: colY, w: COL2_W, h: 0.5, fill: { color: C.blue }, line: { color: C.blue } });
-  slide.addText('RIEDEL / Axel Wehrle liefert', { x: COL2_X[1] + 0.15, y: colY, w: COL2_W - 0.3, h: 0.5, fontSize: 14, bold: true, color: C.white, fontFace: 'Arial', align: 'left', valign: 'middle', margin: 0 });
-  addBulletBlock(slide, [
-    'Ansprechpartner (CISO/DSB/Legal/Fachbereiche)',
-    'Systemübersicht, Kommentierung der Leitplanken',
-    'Dateninventar-Input, Entscheidung Pilot-Use-Cases',
-    'Teilnahme an Interviews',
-    'Vorhandene Prozessdokumentation',
-  ], COL2_X[1] + 0.15, colY + 0.65, COL2_W - 0.3, colH - 0.7, { fontSize: 12.5 });
-
-  // Thin divider
-  slide.addShape(ShapeType.rect, { x: CONTENT_X + COL2_W + 0.2, y: colY, w: 0.02, h: colH, fill: { color: C.ltgrey }, line: { color: C.ltgrey } });
-
-  addInsightBox(slide, ShapeType, 'Beide Seiten laufend: Mitwirkung am Risiko- und Abhängigkeitslog. Fehlt ein Beitrag, verschiebt sich die gesamte nachgelagerte Kette — nicht nur ein Arbeitspaket.', CONTENT_X, colY + colH + 0.15, CONTENT_W, 0.8);
+  addInsightBox(slide, ShapeType, 'Beide Seiten laufend: Mitwirkung am Risiko- und Abhängigkeitslog. Fehlt ein Beitrag, verschiebt sich die gesamte nachgelagerte Kette — nicht nur ein Arbeitspaket. Die letzte Spalte tragen wir gern direkt gemeinsam ein.', CONTENT_X, CONTENT_TOP + 4.15, CONTENT_W, 0.75);
 
   addFooter(slide);
-  slide.addNotes('Dieser Fahrplan ist explizit keine Einbahnstraße. Für jedes Arbeitspaket, das ich liefere, gibt es eine Gegenleistung von Ihrer Seite — einen Ansprechpartner, eine Entscheidung, ein Dokument, eine Teilnahme. Das ist kein Misstrauensvotum, sondern die ehrliche Konsequenz aus der Abhängigkeitskette, die wir gerade durchgegangen sind: Wenn eine Seite ihren Beitrag nicht rechtzeitig liefert, verschiebt sich nicht nur ein Arbeitspaket, sondern die gesamte nachgelagerte Kette bis zum Checkpoint.');
+  slide.addNotes('Dieser Fahrplan ist explizit keine Einbahnstraße. Für jedes Arbeitspaket, das ich liefere, gibt es eine Gegenleistung von Ihrer Seite — einen Ansprechpartner, eine Entscheidung, ein Dokument, eine Teilnahme. Das ist kein Misstrauensvotum, sondern die ehrliche Konsequenz aus der Abhängigkeitskette, die wir gerade durchgegangen sind. Die letzte Spalte lassen wir bewusst offen: Wenn Sie mögen, tragen wir jetzt gemeinsam ein, wer bei Ihnen für welches Arbeitspaket verantwortlich zeichnet — dann verlässt niemand den Raum mit einer offenen Zuordnung. Wenn eine Seite ihren Beitrag nicht rechtzeitig liefert, verschiebt sich nicht nur ein Arbeitspaket, sondern die gesamte nachgelagerte Kette bis zum Checkpoint.');
 })();
 
 // ============================================================
@@ -687,50 +710,60 @@ const NOTES_PREFIX = '';
   const slide = pres.addSlide();
   slide.background = { color: C.white };
   addHeaderBar(slide, ShapeType);
-  addHeadline(slide, 'Eine Woche mit vier parallelen kritischen Strängen ist das\ngrößte Terminrisiko der Phase', { fontSize: 22 });
+  addHeadline(slide, 'Ihre Interviews kollidieren mit zwei kritischen Baustein-1-Arbeiten —\ndas entschärfen wir jetzt gemeinsam, nicht erst im Oktober', { fontSize: 19 });
 
   const chartPath = path.join(REPO_ROOT, 'output', 'riedel-kickoff', 'charts', 'slide_13_chart.png');
   slide.addImage({ path: chartPath, x: 0.5, y: 1.2, w: 8.5, h: 4.8 });
 
   addInsightBox(slide, ShapeType,
-    'Drei Entzerrungsoptionen — bereits heute geplant:\n\n1. Interviews auf 2 statt 3 Wochen verdichten\n\n2. Budget-Zwischenlieferung auf Screening-Basis halten\n\n3. Pilot-Use-Case-Auswahl (B1) eine Woche vorziehen',
-    9.2, 1.5, 3.8, 4.5);
+    'Betrifft Sie direkt: Ihre Fachbereiche stehen in derselben Woche für Interviews UND für die Pilot-Use-Case-Entscheidung bereit.\n\nWelche Option passt am besten — bitte heute entscheiden:\n\n1. Interviews auf 2 statt 3 Wochen verdichten\n\n2. Budget-Zwischenlieferung auf Screening-Basis halten\n\n3. Pilot-Use-Case-Auswahl (B1) eine Woche vorziehen',
+    9.2, 1.15, 3.8, 4.85);
 
   addSourceLine(slide, 'Quelle: MGIM, Detailplanung Initialisierungsphase RIEDEL Networks, Stand 16.9.2026.', 0.5, 6.05, 8.5);
   addFooter(slide);
-  slide.addNotes('Ich zeige Ihnen dieses Risiko bewusst offen und heute, nicht erst wenn es eintritt. In der Woche vom 6. bis 24. Oktober laufen bei mir als Einzelberater vier zeitkritische Stränge gleichzeitig: zwei aus Baustein 1, zwei aus Baustein 2, plus die Budget-Zwischenlieferung mitten in dieser Phase. Das ist die höchste Belastungsspitze der gesamten Initialisierungsphase. Ich habe dafür bereits drei konkrete Entzerrungsoptionen vorbereitet, die wir heute gemeinsam entscheiden sollten, statt sie im Oktober unter Zeitdruck zu improvisieren.');
+  slide.addNotes('Ich zeige Ihnen dieses Risiko bewusst offen und heute, nicht erst wenn es eintritt — und es betrifft Sie direkt, nicht nur mich als Berater: In derselben Woche brauche ich Ihre Fachbereiche sowohl für die Interviews als auch für die Pilot-Use-Case-Entscheidung in Baustein 1. Ich habe dafür drei konkrete Entzerrungsoptionen vorbereitet. Lassen Sie uns jetzt gemeinsam entscheiden, welche für Sie am besten passt, statt das im Oktober unter Zeitdruck zu improvisieren.');
 })();
 
 // ============================================================
-// Slide 14 — STAT/TIMELINE (Checkpoint 1 als Entscheidungspunkt)
+// Slide 14 — PROCESS/TIMELINE (Checkpoint 1: several running decision points
+// converge into one consolidated continuation decision — not "the only
+// point," which read as a single-gate, high-risk governance model)
 // ============================================================
 (function buildSlide14() {
   const slide = pres.addSlide();
   slide.background = { color: C.offwht };
   addHeaderBar(slide, ShapeType);
-  addHeadline(slide, 'Checkpoint 1 Mitte November ist der einzige Punkt, an dem\ngemeinsam über Fortsetzung, Anpassung oder Abbruch entschieden wird', { fontSize: 20 });
+  addHeadline(slide, 'Mehrere laufende Entscheidungen bündeln sich am Checkpoint 1\nzu einer gemeinsamen Fortsetzungsentscheidung', { fontSize: 21 });
 
-  const streams = [
-    ['Baustein 1 liefert', ['Fixierte Leitplanken', 'White-Label-Zielbild', 'Geklärte Lizenzrisiken', 'Initiale Vendor-Shortlist']],
-    ['Baustein 2 liefert', ['Use-Case-Longlist + Scoring', 'Gemeinsame Fokusbereich-Auswahl']],
+  const milestones = [
+    ['Kickoff:\nRollen & Scope', '21.–22.9.'],
+    ['Leitplanken\nkommentiert', 'bis 10.10.'],
+    ['Pilot-Use-Case\nentschieden', 'bis 24.10.'],
+    ['Longlist\nbewertet', 'bis 7.11.'],
   ];
-  streams.forEach((s, i) => {
-    const x = COL2_X[i];
-    addCard(slide, ShapeType, x, CONTENT_TOP + 0.1, COL2_W, 2.0, C.white, C.blue, 0.1);
-    slide.addText(s[0], {
-      x: x + 0.2, y: CONTENT_TOP + 0.25, w: COL2_W - 0.4, h: 0.4, fontSize: 14, bold: true,
-      color: C.blue, fontFace: 'Arial', align: 'left', margin: 0,
-    });
-    addBulletBlock(slide, s[1], x + 0.2, CONTENT_TOP + 0.7, COL2_W - 0.4, 1.3, { fontSize: 12 });
+  const msGap = 0.25;
+  const msW = (CONTENT_W - 3 * msGap) / 4;
+  const msY = CONTENT_TOP + 0.1, msH = 1.05;
+  milestones.forEach((m, i) => {
+    const x = CONTENT_X + i * (msW + msGap);
+    if (i > 0) addConnector(slide, x - msGap, msY + msH / 2, msGap);
+    addProcessBox(slide, x, msY, msW, msH, m[0], m[1]);
   });
 
-  slide.addText('▼  Checkpoint 1 — Woche 9.–13.11.2026', {
-    x: CONTENT_X, y: CONTENT_TOP + 2.25, w: CONTENT_W, h: 0.45, fontSize: 15, bold: true,
-    color: C.grey, fontFace: 'Arial', align: 'center', margin: 0,
+  slide.addText('bündelt sich zu', {
+    x: CONTENT_X, y: msY + msH + 0.08, w: CONTENT_W, h: 0.3, fontSize: 11, italic: true,
+    color: C.midgrey, fontFace: 'Arial', align: 'center', margin: 0,
+  });
+
+  const cpY = msY + msH + 0.45, cpW = 6.0, cpX = CONTENT_X + (CONTENT_W - cpW) / 2;
+  addCard(slide, ShapeType, cpX, cpY, cpW, 0.85, C.blue, C.blue, 0.1);
+  slide.addText('Checkpoint 1 — Woche 9.–13.11.2026', {
+    x: cpX, y: cpY, w: cpW, h: 0.85, fontSize: 15, bold: true, color: C.white,
+    fontFace: 'Arial', align: 'center', valign: 'middle', margin: 0,
   });
 
   const decisions = ['Fortsetzung', 'Anpassung', 'Bewusster Abbruch'];
-  const dY = CONTENT_TOP + 2.85;
+  const dY = cpY + 0.85 + 0.35;
   decisions.forEach((d, i) => {
     const x = COL3_X[i];
     addCard(slide, ShapeType, x, dY, COL3_W, 0.8, C.grey, C.grey, 0.08);
@@ -742,7 +775,7 @@ const NOTES_PREFIX = '';
   addSourceLine(slide, 'Entscheidungsvorlage: MGIM. Auf Faktenbasis, nicht auf Bauchgefühl.', CONTENT_X, dY + 0.95, CONTENT_W);
 
   addFooter(slide);
-  slide.addNotes('Alles, was wir heute besprechen, läuft auf einen einzigen Punkt zu: den Checkpoint in der Woche vom 9. bis 13. November. Dort bringen wir die Ergebnisse aus beiden Bausteinen zusammen — fixierte Leitplanken, geklärte Lizenzfragen und eine erste Vendor-Tendenz aus Baustein 1, sowie die bewertete Use-Case-Longlist und eine gemeinsame Fokusbereich-Entscheidung aus Baustein 2. Am Checkpoint entscheiden Sie dann auf einer klaren Faktenbasis, wie es weitergeht — mit voller Fortsetzung, mit Anpassungen, oder, falls die Faktenlage es nahelegt, auch mit einem bewussten Stopp.');
+  slide.addNotes('Governance in dieser Phase heißt nicht: fünf Monate arbeiten und erst am Ende erfahren, ob es funktioniert hat. Es gibt laufend Entscheidungspunkte — die Kickoff-Rollen, die Kommentierung der Leitplanken durch CISO und Datenschutz, die Pilot-Use-Case-Entscheidung, die bewertete Longlist. All das bündelt sich am Checkpoint in der Woche vom 9. bis 13. November zu einer gemeinsamen, gut vorbereiteten Fortsetzungsentscheidung — mit voller Fortsetzung, mit Anpassungen, oder, falls die Faktenlage es nahelegt, auch mit einem bewussten Stopp.');
 })();
 
 // ============================================================
@@ -754,32 +787,44 @@ const NOTES_PREFIX = '';
   addAccentBar(slide, ShapeType, 0, 0, 7.5);
   addSlashDivider(slide, EDGE_MARGIN_X, 0.7, 0.6);
 
-  slide.addText('Der Kickoff selbst ist der erste Commitment-Moment —\nRollen und Ansprechpartner müssen bis Kickoff-Ende stehen', {
-    x: EDGE_MARGIN_X, y: 1.4, w: 10.7, h: 1.7, fontSize: 27, bold: true, color: C.white,
+  slide.addText('Der Kickoff gelingt am besten mit Ihrer Einschätzung, wer aus\ndem Unternehmen eingebunden werden sollte', {
+    x: EDGE_MARGIN_X, y: 1.25, w: 10.7, h: 1.5, fontSize: 25, bold: true, color: C.white,
     fontFace: 'Arial', align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.15,
   });
-  slide.addShape(ShapeType.rect, { x: EDGE_MARGIN_X, y: 3.15, w: 3.5, h: 0.03, fill: { color: C.blue }, line: { color: C.blue } });
+  slide.addShape(ShapeType.rect, { x: EDGE_MARGIN_X, y: 2.85, w: 3.5, h: 0.03, fill: { color: C.blue }, line: { color: C.blue } });
 
-  const todos = [
-    'Bis Kickoff-Ende (22.9.): Axel Wehrle benennt Ansprechpartner CISO/DSB/Legal/Fachbereiche',
-    'Bis Kickoff-Ende: Bestätigung/Ergänzung der Bereichsliste für Baustein 2 (Discovery)',
+  const asks = [
+    'Wir würden Sie bitten, uns bis Kickoff-Ende die Ansprechpartner für CISO, Datenschutz, Legal und die Fachbereiche zu nennen',
+    'Ihre Sicht ist gefragt: Passt die vorgeschlagene Bereichsliste für die Discovery, oder sehen Sie das anders?',
     'MGIM liefert die Kickoff-Agenda vorab bis 19.9.',
   ];
   slide.addText(
-    todos.map((t) => ({ text: t, options: { color: C.white, bullet: { code: '2022' } } })),
+    asks.map((t, i) => ({ text: t, options: { color: C.white, bullet: { code: '2022' }, breakLine: i < asks.length - 1 } })),
     {
-      x: EDGE_MARGIN_X, y: 3.5, w: 10.7, h: 1.8, fontSize: 15, color: C.white, fontFace: 'Arial',
+      x: EDGE_MARGIN_X, y: 3.15, w: 10.7, h: 1.5, fontSize: 14, color: C.white, fontFace: 'Arial',
       align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.3, bullet: { code: '2022', indent: 18 },
     }
   );
 
+  addCard(slide, ShapeType, EDGE_MARGIN_X, 4.85, 10.3, 1.0, C.deepbl, C.blue, 0.1);
+  slide.addText(
+    [
+      { text: 'Eine Frage an Sie: ', options: { bold: true, color: C.white } },
+      { text: 'Wie würden Sie selbst an die Einbindung der Fachbereiche herangehen? Ihre Erfahrung ist hier der wichtigste Kompass für diesen Fahrplan.', options: { color: C.white, italic: true } },
+    ],
+    {
+      x: EDGE_MARGIN_X + 0.25, y: 4.85, w: 9.8, h: 1.0, fontSize: 13.5, fontFace: 'Arial',
+      align: 'left', valign: 'middle', margin: 0, lineSpacingMultiple: 1.2,
+    }
+  );
+
   slide.addText('Nächster fixer Termin: Checkpoint 1 — Woche 9.–13.11.2026', {
-    x: EDGE_MARGIN_X, y: 5.5, w: 10.7, h: 0.5, fontSize: 15, bold: true, color: C.blue,
+    x: EDGE_MARGIN_X, y: 6.1, w: 10.7, h: 0.4, fontSize: 14, bold: true, color: C.blue,
     fontFace: 'Arial', align: 'left', margin: 0,
   });
 
   addFooter(slide, 'Markus Goetz Interim Management  |  www.markusgoetz.com');
-  slide.addNotes('Damit schließt sich der Kreis zum Anfang dieser Präsentation: Der Kickoff selbst ist bereits der erste Commitment-Moment im Fahrplan. Bevor wir heute auseinandergehen, brauchen wir von Ihnen die Ansprechpartner aus CISO, Datenschutz, Legal und den Fachbereichen sowie die bestätigte Bereichsliste für die Discovery. Von unserer Seite liegt die Kickoff-Agenda bereits vor. Der nächste fixe Termin, auf den ab heute alles hinarbeitet, ist der Checkpoint in der Woche vom 9. bis 13. November.');
+  slide.addNotes('Bevor wir auseinandergehen, drei Bitten statt Vorgaben von meiner Seite: Könnten Sie uns bis Kickoff-Ende die Ansprechpartner aus CISO, Datenschutz, Legal und den Fachbereichen nennen? Und wie sehen Sie die vorgeschlagene Bereichsliste für die Discovery — passt die aus Ihrer Sicht, oder würden Sie etwas anders schneiden? Von unserer Seite liegt die Kickoff-Agenda bereits vor. Und weil Sie hier deutlich tiefer im Unternehmen stecken als ich: Wie würden Sie selbst an die Einbindung der Fachbereiche herangehen? Das ist keine rhetorische Frage — Ihre Erfahrung soll diesen Fahrplan mitprägen, nicht nur bestätigen. Der nächste fixe Termin, auf den ab heute alles hinarbeitet, ist der Checkpoint in der Woche vom 9. bis 13. November.');
 })();
 
 const outPath = path.join(REPO_ROOT, 'output', 'riedel-kickoff', 'riedel-kickoff.pptx');

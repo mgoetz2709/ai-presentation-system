@@ -1,6 +1,52 @@
 # Design Delivery Report — RIEDEL Networks Kickoff-Deck
 
-**Project:** `riedel-kickoff` · **Phase:** 5 (Design) · **Status:** Build complete, passed validation (Revision 4)
+**Project:** `riedel-kickoff` · **Phase:** 5 (Design) · **Status:** Build complete, passed validation (Revision 5)
+
+## Revision 5 (nach Rückmeldung von Markus Goetz)
+
+**Bug fix (affects multiple slides):** `addBulletBlock()` — the shared bullet-list helper — was
+missing `breakLine` between items, so pptxgenjs rendered every bullet list as one run-on paragraph
+with a single bullet glyph (visible on slides 11, 12, and 14 in the reviewed export). Fixed once
+in the helper; every slide using it is corrected automatically. Also fixed the same missing-
+`breakLine` pattern in slide 15's closing list.
+
+Six content/design fixes from this review round:
+
+1. **Slide 6** — the right-hand legend merely repeated the diagram's labels/questions as text.
+   Replaced with a **table** adding a "Nutzen" (benefit) column — what RIEDEL concretely gets from
+   each of the five building blocks, not just its leading question restated.
+2. **Slide 11 (Opportunity Scoring)** — the bare formula ("Wirkung × Automatisierbarkeit ×
+   Datenverfügbarkeit") was too abstract for a C-level read. Replaced with a 1–3 rating-scale
+   table (one row per dimension, one-line definition per rating) plus a card labeled
+   **"Beispielhafte Illustration — keine reale Bewertung"** with a worked, clearly-hypothetical
+   example calculation (Score 18) — makes the mechanism concrete without presenting invented data
+   as real.
+3. **Slide 12 (Commitments)** — converted from two parallel text columns into a genuine **table**,
+   one row per work package with MGIM's and RIEDEL's contribution side by side, plus a fourth,
+   intentionally blank **"Verantwortlich (RIEDEL)"** column so Axel Wehrle can name or write in
+   responsible people live in the room.
+4. **Slide 13 (Kapazitätsrisiko)** — previously read as MGIM's own internal scheduling problem
+   with no clear reason for RIEDEL to care. Reframed: headline and insight box now state upfront
+   that the collision affects RIEDEL's own Fachbereiche directly (needed for interviews AND the
+   Pilot-Use-Case decision in the same week), and the slide now closes with an explicit
+   decision-ask ("welche Option passt am besten — bitte heute entscheiden") instead of just an FYI.
+5. **Slide 14 (Checkpoint)** — the old headline ("...ist der einzige Punkt, an dem entschieden
+   wird") read as a single-gate governance model, which comes across as weak structure for a
+   five-month engagement. Reframed, without inventing new milestones: the plan already contains
+   four running decision points (Kickoff-Rollen, Leitplanken-Kommentierung, Pilot-Use-Case-
+   Entscheidung, Longlist-Bewertung); the slide now shows them as a mini-timeline that *bündelt
+   sich* into Checkpoint 1, rather than presenting Checkpoint 1 as the sole point of engagement.
+6. **Slide 15 (Closing)** — tone was directive ("...müssen bis Kickoff-Ende stehen"), which reads
+   as demanding for a CTO whose expertise MGIM wants to draw on, not just direct. Reworded asks as
+   requests ("Wir würden Sie bitten..."), and added an explicit open question inviting his own
+   view on how to approach Fachbereich-integration — his experience should shape the plan, not
+   just confirm it.
+
+**Open item, not resolved unilaterally:** Markus Goetz separately asked whether, in the spirit of
+the Pyramid Principle, this kind of "what we need from you / what's your view" moment belongs at
+the *front* of the deck instead of the close. That would mean reissuing the Storyline's slide_id
+index (Phase 3) — left as-is pending his decision; see `03-content-package.md` Slide 15 for the
+flagged open point.
 
 ## Revision 4 (nach Rückmeldung von Markus Goetz)
 

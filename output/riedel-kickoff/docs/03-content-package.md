@@ -24,8 +24,8 @@ Tone: **C-Level** (formal/executive) — Phase 1 intake flagged this briefing as
 | 11 | Opportunity Scoring nach Wirkung, Automatisierbarkeit und Datenverfügbarkeit macht die Fokusauswahl objektiv statt Bauchgefühl | G2 — Use-Case-Longlist & Scoring-Framework | |
 | 12 | Der Fahrplan funktioniert nur mit klar verteilten Commitments auf beiden Seiten — nicht nur MGIM liefert | G3 — Rollen & Commitments | |
 | 13 | Eine Woche mit vier parallelen kritischen Strängen ist das größte Terminrisiko der Phase — und bereits heute mit drei Entzerrungsoptionen geplant | G3 — Kapazitätsrisiko | |
-| 14 | Checkpoint 1 Mitte November ist der einzige Punkt, an dem gemeinsam über Fortsetzung, Anpassung oder Abbruch entschieden wird | G3 — Checkpoint als Entscheidungspunkt | |
-| 15 | Der Kickoff selbst ist der erste Commitment-Moment — Rollen und Ansprechpartner müssen bis Kickoff-Ende stehen | Closing — Call to Action | |
+| 14 | Mehrere laufende Entscheidungen bündeln sich am Checkpoint 1 zu einer gemeinsamen Fortsetzungsentscheidung | G3 — Checkpoint als Entscheidungspunkt | |
+| 15 | Der Kickoff gelingt am besten mit Ihrer Einschätzung, wer aus dem Unternehmen eingebunden werden sollte | Closing — Call to Action | |
 
 ---
 
@@ -187,6 +187,12 @@ Hub-and-Spoke-/Radialdiagrammen bestätigt: 3–6 Spokes optimal (hier 5), kurze
 ausführlichere Erklärung außerhalb (hier als Legende rechts), Farbdifferenzierung zwischen
 Zentrum und Satelliten passend zum Farbsystem.
 
+**Design-Hinweis (Revision 5, nach Rückmeldung von Markus Goetz):** Die Text-Legende rechts war
+reine Wiederholung dessen, was das Diagramm links ohnehin schon zeigte. Umgestellt auf eine
+**Tabelle** mit einer zusätzlichen Spalte **"Nutzen"** — was RIEDEL konkret von jedem Baustein
+hat (z. B. "verhindert Compliance-Nacharbeit später"), statt nur die Leitfrage aus dem Diagramm
+in Textform zu wiederholen.
+
 **Bullets / Diagramm-Inhalt**
 - Zentrum: "Architekturentscheidung" (MG Blue, das eine Element, auf das der Blick fällt)
 - 5 gleichberechtigte Bausteine (Kreise um das Zentrum, radial verbunden):
@@ -211,8 +217,7 @@ PROCESS/Framework-Slide, Hub-and-Spoke-Diagramm links (~60% Breite): zentraler K
 "Architekturentscheidung" (MG Blue, weiße Schrift), fünf gleich große Satelliten-Kreise
 radial angeordnet (weiß mit blauer Kontur, graue Schrift, kurzes Label), verbunden mit dünnen
 grauen Radiallinien zum Zentrum — keine Pfeile, keine implizite Reihenfolge. Rechts (~35% Breite)
-Legende: pro Baustein ein blaues Quadrat + fetter Kurzlabel + eine Zeile Erläuterung, darunter
-Fußnote mit den Terminen.
+eine zweispaltige Tabelle (Baustein inkl. Leitfrage / Nutzen), darunter Fußnote mit den Terminen.
 
 **Alt-Text**
 Hub-and-Spoke-Diagramm: zentraler Kreis "Architekturentscheidung", umgeben von fünf gleichwertigen
@@ -352,136 +357,181 @@ Auswertung der Ist-Prozessdokumentation und Tool-Umgebung.
 
 ## Slide 11: Opportunity Scoring nach Wirkung, Automatisierbarkeit und Datenverfügbarkeit macht die Fokusauswahl objektiv statt Bauchgefühl
 
-**Bullets**
-- Longlist über alle Unternehmensbereiche, MGIM liefert bis 7.11.
-- Bewertungsraster: Wirkung × Automatisierbarkeit × Datenverfügbarkeit — pro Use-Case gleich angewendet
-- Ergebnis ist vergleichbar, nicht Einzelmeinung — Grundlage für die Fokusbereich-Entscheidung am Checkpoint
-- Konkrete Scores entstehen erst im Projektverlauf aus den Interviews — diese Folie zeigt das Bewertungsraster, keine vorweggenommenen Ergebnisse
+**Design-Hinweis (Revision 5, nach Rückmeldung von Markus Goetz):** Die reine Formel-Darstellung
+("Wirkung × Automatisierbarkeit × Datenverfügbarkeit") war für eine C-Level-Runde zu abstrakt —
+nicht sofort verständlich, was "hoch" oder "niedrig" pro Dimension konkret bedeutet. Ersetzt durch
+eine 1–3-Bewertungsskala mit einer Zeile Definition je Ausprägung, plus eine klar als
+**"Beispielhafte Illustration — keine reale Bewertung"** gekennzeichnete Beispielrechnung, damit
+der Mechanismus greifbar wird, ohne nicht existierende Scores als echt darzustellen.
+
+**Bullets / Tabellen-Inhalt**
+- Bewertungstabelle (Dimension × Ausprägung 1–3): Wirkung, Automatisierbarkeit, Datenverfügbarkeit, je mit kurzer Definition für gering/mittel/hoch
+- Formel: Score = Wirkung × Automatisierbarkeit × Datenverfügbarkeit (max. 27, höchster Score = höchste Priorität)
+- Beispielhafte Illustration (explizit gekennzeichnet, keine echten Daten): "Rechnungsprüfung automatisieren" — Wirkung 3 × Automatisierbarkeit 2 × Datenverfügbarkeit 3 = Score 18 → hohe Priorität
+- Fußnote: Longlist über alle Bereiche, MGIM liefert bis 7.11.; konkrete Scores entstehen erst aus den Interviews im Oktober
 
 **Speaker Notes**
 Damit die Auswahl des Fokusbereichs am Checkpoint nicht auf Bauchgefühl beruht, bewerten wir jede
-Idee aus der Longlist nach demselben Raster: Wirkung, Automatisierbarkeit und
-Datenverfügbarkeit. Das macht unterschiedliche Bereiche — Netzwerkbetrieb, Kundenservice,
-Projektabwicklung — überhaupt erst vergleichbar. Zur Einordnung: Die konkreten Scores existieren
-heute noch nicht, sie entstehen aus den Interviews und der Prozessprüfung im Oktober. Was ich
-Ihnen heute zeige, ist das Raster, nach dem wir bewerten werden.
+Idee aus der Longlist nach demselben Raster, mit einer einfachen Skala von 1 bis 3 je Dimension:
+Wirkung, Automatisierbarkeit und Datenverfügbarkeit. Multipliziert ergibt das einen Score von
+maximal 27 — je höher, desto höher die Priorität. Zur Veranschaulichung ein rein angenommenes
+Beispiel, keine echte Bewertung: Ein Use-Case mit hoher Wirkung, mittlerer Automatisierbarkeit und
+hoher Datenverfügbarkeit käme auf einen Score von 18. Die tatsächlichen Scores entstehen erst aus
+den Interviews und der Prozessprüfung im Oktober — was ich Ihnen heute zeige, ist das Raster, nach
+dem wir bewerten werden.
 
 **Visual Spec**
-PROCESS/Framework-Slide (kein Chart mit erfundenen Werten): Drei-Achsen-Icon-Diagramm mit den
-Dimensionen Wirkung, Automatisierbarkeit, Datenverfügbarkeit, die sich zu "Opportunity Score"
-zusammenfügen. Explizit keine Beispiel-Scores oder Platzhalterzahlen, um keine Daten vorwegzunehmen,
-die es noch nicht gibt.
+Tabelle (4 Spalten: Dimension, 1–gering, 2–mittel, 3–hoch; 3 Zeilen) oben, darunter zentrierte
+Formelzeile, darunter eine hervorgehobene Karte mit der klar gekennzeichneten Beispielrechnung,
+darunter die Fußnote in 9pt Mid Grey.
 
 **Alt-Text**
-Drei-Achsen-Framework-Diagramm zeigt die Bewertungsdimensionen Wirkung, Automatisierbarkeit und
-Datenverfügbarkeit für das Opportunity Scoring, ohne Beispieldaten.
+Bewertungstabelle mit drei Dimensionen (Wirkung, Automatisierbarkeit, Datenverfügbarkeit) je auf
+einer 1–3-Skala definiert, darunter die Score-Formel und eine explizit als Beispiel gekennzeichnete
+Beispielrechnung mit Score 18.
 
 ---
 
 ## Slide 12: Der Fahrplan funktioniert nur mit klar verteilten Commitments auf beiden Seiten — nicht nur MGIM liefert
 
-**Bullets**
-- **MGIM liefert:** Kickoff-Agenda, strukturierte Anforderungsaufnahme, Leitplanken-Entwurf, Klassifizierungslogik, Vorschlagslisten (Pilot-Use-Cases, Vendoren), Interview-Leitfaden & -Durchführung, Longlist + Scoring, Checkpoint-Vorlage
-- **RIEDEL / Axel Wehrle liefert:** benannte Ansprechpartner (CISO/DSB/Legal/Fachbereiche), Systemübersicht, Kommentierung der Leitplanken, Dateninventar-Input, Entscheidung zu Pilot-Use-Cases, Teilnahme an Interviews, vorhandene Prozessdokumentation
-- **Beide Seiten laufend:** Mitwirkung am Risiko- und Abhängigkeitslog
-- Fehlt ein Beitrag, verschiebt sich die gesamte nachgelagerte Kette — nicht nur ein einzelnes Arbeitspaket
+**Design-Hinweis (Revision 5, nach Rückmeldung von Markus Goetz):** Von zwei nebeneinander
+stehenden Text-Spalten auf eine echte **Tabelle** umgestellt, pro Arbeitspaket eine Zeile mit
+MGIM-Beitrag und RIEDEL-Beitrag nebeneinander (statt zwei komplette, separat aufgezählte Listen).
+Zusätzlich eine vierte Spalte **"Verantwortlich (RIEDEL)"**, bewusst leer/mit Linie vorbereitet,
+damit Axel Wehrle live im Meeting Namen eintragen oder nennen kann — macht die Folie zu einem
+Arbeitsdokument statt nur einer Read-only-Übersicht.
+
+**Bullets / Tabellen-Inhalt (5 Zeilen: Arbeitspaket / MGIM liefert / RIEDEL liefert / Verantwortlich)**
+- Kickoff & Rollen — Kickoff-Agenda — Ansprechpartner CISO/DSB/Legal/Fachbereiche — _(leer)_
+- Anforderungen & Leitplanken — Anforderungsaufnahme, Leitplanken-Entwurf — Systemübersicht, Kommentierung — _(leer)_
+- Datenklassifizierung & Pilot-Use-Case — Klassifizierungslogik, Vorschlagsliste — Dateninventar-Input, Entscheidung — _(leer)_
+- Discovery (Baustein 2) — Interview-Leitfaden & -Durchführung — Bereichsliste, Ansprechpartner, Interview-Teilnahme, Prozessdokumentation — _(leer)_
+- Longlist & Checkpoint — Longlist + Scoring, Checkpoint-Vorlage — Entscheidung Fokusbereich — _(leer)_
+- Fußnote: Beide Seiten laufend — Mitwirkung am Risiko-/Abhängigkeitslog
 
 **Speaker Notes**
 Dieser Fahrplan ist explizit keine Einbahnstraße. Für jedes Arbeitspaket, das ich liefere, gibt es
 eine Gegenleistung von Ihrer Seite — einen Ansprechpartner, eine Entscheidung, ein Dokument, eine
 Teilnahme. Das ist kein Misstrauensvotum, sondern die ehrliche Konsequenz aus der
-Abhängigkeitskette, die wir gerade durchgegangen sind: Wenn eine Seite ihren Beitrag nicht
-rechtzeitig liefert, verschiebt sich nicht nur ein Arbeitspaket, sondern die gesamte
-nachgelagerte Kette bis zum Checkpoint.
+Abhängigkeitskette, die wir gerade durchgegangen sind. Die letzte Spalte lassen wir bewusst offen:
+Wenn Sie mögen, tragen wir jetzt gemeinsam ein, wer bei Ihnen für welches Arbeitspaket
+verantwortlich zeichnet — dann verlässt niemand den Raum mit einer offenen Zuordnung. Wenn eine
+Seite ihren Beitrag nicht rechtzeitig liefert, verschiebt sich nicht nur ein Arbeitspaket, sondern
+die gesamte nachgelagerte Kette bis zum Checkpoint.
 
 **Visual Spec**
-COMPARISON-Slide, zwei Spalten "MGIM liefert" (grau) / "RIEDEL liefert" (blau), dritte, schmalere
-Zeile darunter für "beide Seiten laufend".
+Tabelle, 4 Spalten × 6 Zeilen (inkl. Header), letzte Spalte mit Unterstrich-Platzhalter zum
+Ausfüllen. Insight-Box darunter für den laufenden Risiko-Log-Hinweis.
 
 **Alt-Text**
-Zwei-Spalten-Vergleich der Liefergegenstände von MGIM und RIEDEL über die gesamte
-Initialisierungsphase, darunter die gemeinsame laufende Verantwortung für das Risiko-Log.
+Vier-Spalten-Tabelle: Arbeitspaket, MGIM liefert, RIEDEL liefert, und eine leere Spalte
+"Verantwortlich (RIEDEL)" zum Ausfüllen im Meeting.
 
 ---
 
-## Slide 13: Eine Woche mit vier parallelen kritischen Strängen ist das größte Terminrisiko der Phase — und bereits heute mit drei Entzerrungsoptionen geplant
+## Slide 13: Ihre Interviews kollidieren mit zwei kritischen Baustein-1-Arbeiten — das entschärfen wir jetzt gemeinsam, nicht erst im Oktober
+
+**Design-Hinweis (Revision 5, nach Rückmeldung von Markus Goetz):** Ursprünglich wirkte diese
+Folie wie ein reines MGIM-internes Ressourcenproblem ("mein Terminrisiko als Berater") ohne
+erkennbaren Grund, warum es der Kunde sehen muss. Klargestellt: Die Kollision betrifft RIEDELs
+eigene Fachbereiche direkt (sie werden in derselben Woche für Interviews UND für die
+Pilot-Use-Case-Entscheidung gebraucht) — und die Folie endet jetzt mit einer expliziten
+Entscheidungsaufforderung an die Runde, statt nur zu informieren.
 
 **Bullets**
-- In der Woche 6.10.–24.10. laufen bei einem Einzelberater vier zeitkritische Stränge gleichzeitig: Datenklassifizierung + Pilot-Use-Case-Auswahl (B1), Interviews + Prozessdoku-Prüfung (B2), Budget-Zwischenlieferung (20.10.)
-- Entzerrungsoption 1: Interviews auf 2 statt 3 Wochen verdichten (weniger Bereiche exemplarisch statt vollständig)
-- Entzerrungsoption 2: Budget-Zwischenlieferung bewusst auf Screening-Basis halten (im Angebot ohnehin so vorgesehen)
-- Entzerrungsoption 3: Pilot-Use-Case-Auswahl (B1) eine Woche früher anstoßen, um Kollision mit Interview-Peak zu vermeiden
+- Betrifft RIEDEL direkt: Fachbereiche werden in derselben Woche für Interviews UND Pilot-Use-Case-Entscheidung gebraucht
+- Welche Option passt am besten — Entscheidung heute:
+  1. Interviews auf 2 statt 3 Wochen verdichten
+  2. Budget-Zwischenlieferung auf Screening-Basis halten
+  3. Pilot-Use-Case-Auswahl (B1) eine Woche vorziehen
 
 **Speaker Notes**
-Ich zeige Ihnen dieses Risiko bewusst offen und heute, nicht erst wenn es eintritt. In der Woche
-vom 6. bis 24. Oktober laufen bei mir als Einzelberater vier zeitkritische Stränge gleichzeitig:
-zwei aus Baustein 1, zwei aus Baustein 2, plus die Budget-Zwischenlieferung mitten in dieser
-Phase. Das ist die höchste Belastungsspitze der gesamten Initialisierungsphase. Ich habe dafür
-bereits drei konkrete Entzerrungsoptionen vorbereitet, die wir heute gemeinsam entscheiden
-sollten, statt sie im Oktober unter Zeitdruck zu improvisieren.
+Ich zeige Ihnen dieses Risiko bewusst offen und heute, nicht erst wenn es eintritt — und es
+betrifft Sie direkt, nicht nur mich als Berater: In derselben Woche brauche ich Ihre Fachbereiche
+sowohl für die Interviews als auch für die Pilot-Use-Case-Entscheidung in Baustein 1. Ich habe
+dafür drei konkrete Entzerrungsoptionen vorbereitet. Lassen Sie uns jetzt gemeinsam entscheiden,
+welche für Sie am besten passt, statt das im Oktober unter Zeitdruck zu improvisieren.
 
 **Visual Spec**
-CHART-Slide (fortgeschrittene Visualisierung): horizontales Swimlane-/Gantt-Diagramm mit vier
-Balken (Datenklassifizierung, Pilot-Use-Case-Auswahl, Interviews, Prozessdoku-Prüfung) plus einem
-Marker für die Budget-Zwischenlieferung am 20.10., alle über denselben Zeitstrahl 6.10.–24.10.
-gelegt, um die Überlappung visuell sofort erkennbar zu machen. Insight-Box rechts mit den drei
-Entzerrungsoptionen als Kurzliste.
+CHART-Slide: Swimlane-/Gantt-Diagramm links (unverändert), rechts eine Insight-Box, die zuerst die
+Kunden-Relevanz benennt und dann explizit zur Entscheidung zwischen den drei Optionen auffordert.
 
 **Alt-Text**
-Swimlane-Diagramm zeigt vier parallel laufende Arbeitsstränge in der Woche 6.10.–24.10. mit
-Überlappung und einem Marker für die Budget-Zwischenlieferung am 20.10., daneben drei
-Entzerrungsoptionen.
+Swimlane-Diagramm mit vier parallel laufenden Arbeitssträngen, rechts ein Hinweis auf die direkte
+Relevanz für RIEDELs Fachbereiche und eine Aufforderung, heute zwischen drei Entzerrungsoptionen
+zu entscheiden.
 
 ---
 
-## Slide 14: Checkpoint 1 Mitte November ist der einzige Punkt, an dem gemeinsam über Fortsetzung, Anpassung oder Abbruch entschieden wird
+## Slide 14: Mehrere laufende Entscheidungen bündeln sich am Checkpoint 1 zu einer gemeinsamen Fortsetzungsentscheidung
 
-**Bullets**
-- Baustein 1 liefert zum Checkpoint: fixierte Leitplanken, White-Label-Zielbild, geklärte Lizenzrisiken, initiale Vendor-Shortlist
-- Baustein 2 liefert zum Checkpoint: Use-Case-Longlist + Scoring, gemeinsame Fokusbereich-Auswahl
-- Checkpoint-Entscheidung: Fortsetzung, Anpassung oder bewusster Abbruch — auf Faktenbasis, nicht auf Bauchgefühl
-- Termin: Woche 9.–13.11.2026, MGIM liefert die Entscheidungsvorlage
+**Design-Hinweis (Revision 5, nach Rückmeldung von Markus Goetz):** Die alte Headline
+("...ist der einzige Punkt, an dem entschieden wird") klang, als gäbe es in fünf Monaten nur ein
+einziges Governance-Gate — das liest sich wie ein Strukturschwäche-Eingeständnis, nicht wie
+souveräne Projektsteuerung. Korrigiert: die Folie zeigt jetzt explizit vier bereits im Fahrplan
+angelegte laufende Entscheidungspunkte (Kickoff-Rollen, Leitplanken-Kommentierung,
+Pilot-Use-Case-Entscheidung, Longlist-Bewertung), die sich am Checkpoint 1 zu einer gemeinsamen,
+gut vorbereiteten Fortsetzungsentscheidung bündeln — keine fiktiven neuen Meilensteine, sondern
+eine andere Rahmung bereits vorhandener Fahrplan-Punkte.
+
+**Bullets / Diagramm-Inhalt**
+- 4 laufende Entscheidungspunkte (Mini-Zeitleiste): Kickoff: Rollen & Scope (21.–22.9.) → Leitplanken kommentiert (bis 10.10.) → Pilot-Use-Case entschieden (bis 24.10.) → Longlist bewertet (bis 7.11.)
+- "bündelt sich zu" → Checkpoint 1 (Woche 9.–13.11.2026)
+- 3 mögliche Ergebnisse: Fortsetzung / Anpassung / Bewusster Abbruch — auf Faktenbasis, nicht auf Bauchgefühl
 
 **Speaker Notes**
-Alles, was wir heute besprechen, läuft auf einen einzigen Punkt zu: den Checkpoint in der Woche
-vom 9. bis 13. November. Dort bringen wir die Ergebnisse aus beiden Bausteinen zusammen — fixierte
-Leitplanken, geklärte Lizenzfragen und eine erste Vendor-Tendenz aus Baustein 1, sowie die
-bewertete Use-Case-Longlist und eine gemeinsame Fokusbereich-Entscheidung aus Baustein 2. Am
-Checkpoint entscheiden Sie dann auf einer klaren Faktenbasis, wie es weitergeht — mit voller
-Fortsetzung, mit Anpassungen, oder, falls die Faktenlage es nahelegt, auch mit einem bewussten
-Stopp.
+Governance in dieser Phase heißt nicht: fünf Monate arbeiten und erst am Ende erfahren, ob es
+funktioniert hat. Es gibt laufend Entscheidungspunkte — die Kickoff-Rollen, die Kommentierung der
+Leitplanken durch CISO und Datenschutz, die Pilot-Use-Case-Entscheidung, die bewertete Longlist.
+All das bündelt sich am Checkpoint in der Woche vom 9. bis 13. November zu einer gemeinsamen, gut
+vorbereiteten Fortsetzungsentscheidung — mit voller Fortsetzung, mit Anpassungen, oder, falls die
+Faktenlage es nahelegt, auch mit einem bewussten Stopp.
 
 **Visual Spec**
-STAT/TIMELINE-Slide: zwei Zulieferungs-Ströme (Baustein 1 / Baustein 2) münden visuell in eine
-Checkpoint-Markierung; darunter drei Entscheidungsoptionen (Fortsetzung / Anpassung / Abbruch) als
-gleichwertige Kacheln.
+PROCESS-Slide: vier kleine Prozessboxen (Mini-Zeitleiste der laufenden Entscheidungspunkte),
+Beschriftung "bündelt sich zu", darunter eine größere Checkpoint-1-Karte, darunter drei
+gleichwertige Kacheln für die möglichen Ergebnisse.
 
 **Alt-Text**
-Zwei Zulieferungsstränge aus Baustein 1 und Baustein 2 münden in den Checkpoint-1-Termin, darunter
-drei mögliche Entscheidungsoptionen.
+Vier kleine Meilensteine (Kickoff-Rollen, Leitplanken-Kommentierung, Pilot-Use-Case-Entscheidung,
+Longlist-Bewertung) münden in eine Checkpoint-1-Karte, darunter drei mögliche Ergebnisse.
 
 ---
 
-## Slide 15: Der Kickoff selbst ist der erste Commitment-Moment — Rollen und Ansprechpartner müssen bis Kickoff-Ende stehen
+## Slide 15: Der Kickoff gelingt am besten mit Ihrer Einschätzung, wer aus dem Unternehmen eingebunden werden sollte
+
+**Design-Hinweis (Revision 5, nach Rückmeldung von Markus Goetz):** Die alte Fassung ("...müssen
+bis Kickoff-Ende stehen") klang wie eine Liste von Vorgaben an den Kunden — zu fordernd für einen
+sehr versierten CTO, dessen Expertise MGIM ausdrücklich einbeziehen will. Umformuliert von
+Forderungen zu Bitten, und ergänzt um eine explizite offene Frage nach seiner eigenen
+Einschätzung, statt nur Antworten von ihm einzusammeln.
 
 **Bullets**
-- Bis Kickoff-Ende (22.9.): Axel Wehrle benennt Ansprechpartner CISO/DSB/Legal/Fachbereiche
-- Bis Kickoff-Ende: Bestätigung/Ergänzung der Bereichsliste für Baustein 2 (Discovery)
-- MGIM liefert die Kickoff-Agenda vorab bis 19.9.
-- Nächster fixer Termin: Checkpoint 1, Woche 9.–13.11.2026
+- Bitte statt Vorgabe: Ansprechpartner für CISO/Datenschutz/Legal/Fachbereiche bis Kickoff-Ende benennen
+- Offene Rückfrage: Passt die vorgeschlagene Bereichsliste für die Discovery aus seiner Sicht, oder sieht er das anders?
+- MGIM liefert die Kickoff-Agenda vorab bis 19.9. (eigene Zusage, keine Bitte)
+- Explizite Frage an den CTO: Wie würde er selbst an die Einbindung der Fachbereiche herangehen? — seine Erfahrung soll den Fahrplan mitprägen, nicht nur bestätigen
 
 **Speaker Notes**
-Damit schließt sich der Kreis zum Anfang dieser Präsentation: Der Kickoff selbst ist bereits der
-erste Commitment-Moment im Fahrplan. Bevor wir heute auseinandergehen, brauchen wir von Ihnen die
-Ansprechpartner aus CISO, Datenschutz, Legal und den Fachbereichen sowie die bestätigte
-Bereichsliste für die Discovery. Von unserer Seite liegt die Kickoff-Agenda bereits vor. Der
-nächste fixe Termin, auf den ab heute alles hinarbeitet, ist der Checkpoint in der Woche vom 9.
-bis 13. November.
+Bevor wir auseinandergehen, drei Bitten statt Vorgaben von meiner Seite: Könnten Sie uns bis
+Kickoff-Ende die Ansprechpartner aus CISO, Datenschutz, Legal und den Fachbereichen nennen? Und
+wie sehen Sie die vorgeschlagene Bereichsliste für die Discovery — passt die aus Ihrer Sicht, oder
+würden Sie etwas anders schneiden? Von unserer Seite liegt die Kickoff-Agenda bereits vor. Und
+weil Sie hier deutlich tiefer im Unternehmen stecken als ich: Wie würden Sie selbst an die
+Einbindung der Fachbereiche herangehen? Das ist keine rhetorische Frage — Ihre Erfahrung soll
+diesen Fahrplan mitprägen, nicht nur bestätigen. Der nächste fixe Termin, auf den ab heute alles
+hinarbeitet, ist der Checkpoint in der Woche vom 9. bis 13. November.
 
 **Visual Spec**
-CLOSING-Slide: Headline weiß auf Grau, darunter die vier Bullets als klare To-do-Liste,
-abschließende Blue-Divider-Linie vor dem nächsten Fixtermin.
+CLOSING-Slide: Headline weiß auf Grau, darunter drei Bitten als Liste, darunter eine hervorgehobene
+Karte (Deep Blue) mit der expliziten offenen Frage an den CTO, darunter der nächste Fixtermin.
 
 **Alt-Text**
-Abschlussfolie mit vier konkreten Commitments bis Kickoff-Ende und dem nächsten Fixtermin
-Checkpoint 1.
+Abschlussfolie mit drei Bitten (nicht Forderungen) an RIEDEL, einer hervorgehobenen offenen Frage
+an den CTO nach seiner eigenen Einschätzung, und dem nächsten Fixtermin Checkpoint 1.
+
+**Offener Punkt für Markus Goetz:** Die Frage, ob dieser einladende "Was brauchen wir von Ihnen /
+was ist Ihre Sicht"-Moment stattdessen — im Sinne des pyramidalen Prinzips — bereits ganz an den
+Anfang des Decks gehört, ist noch nicht entschieden. Aktuell bleibt er als Closing stehen; eine
+Verschiebung nach vorne wäre eine Storyline-Änderung (neuer Slide-Index) und wurde bewusst nicht
+ohne Rückfrage umgesetzt.
