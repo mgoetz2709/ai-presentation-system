@@ -21,9 +21,9 @@ Tone: **C-Level** (formal/executive) — Phase 1 intake flagged this briefing as
 | 8 | Modellwahl und Lizenzprüfung laufen bewusst getrennt von der Technologiebegeisterung — Screening vor Festlegung | G1 — Vendor-Screening & Lizenzprüfung | |
 | 9 | Baustein 2 macht die Discovery in drei abhängigen Schritten von der Bereichsliste bis zur Use-Case-Longlist steuerbar | G2 — Fahrplan-Übersicht | |
 | 10 | Strukturierte Interviews mit Prozessverantwortlichen holen Pain Points direkt an der Quelle statt aus Annahmen | G2 — Interviews & Prozessprüfung | |
-| 11 | Opportunity Scoring nach Wirkung, Automatisierbarkeit und Datenverfügbarkeit macht die Fokusauswahl objektiv statt Bauchgefühl | G2 — Use-Case-Longlist & Scoring-Framework | |
+| 11 | Opportunity Scoring nach Wirkung, Automatisierbarkeit und Datenverfügbarkeit macht die Fokusauswahl objektiv | G2 — Use-Case-Longlist & Scoring-Framework | |
 | 12 | Der Fahrplan funktioniert nur mit klar verteilten Commitments auf beiden Seiten — nicht nur MGIM liefert | G3 — Rollen & Commitments | |
-| 13 | Eine Woche mit vier parallelen kritischen Strängen ist das größte Terminrisiko der Phase — und bereits heute mit drei Entzerrungsoptionen geplant | G3 — Kapazitätsrisiko | |
+| 13 | Ihre Interviews kollidieren mit zwei kritischen Baustein-1-Arbeiten — das entschärfen wir jetzt gemeinsam, nicht erst im Oktober | G3 — Kapazitätsrisiko | |
 | 14 | Mehrere laufende Entscheidungen bündeln sich am Checkpoint 1 zu einer gemeinsamen Fortsetzungsentscheidung | G3 — Checkpoint als Entscheidungspunkt | |
 | 15 | Der Kickoff gelingt am besten mit Ihrer Einschätzung, wer aus dem Unternehmen eingebunden werden sollte | Closing — Call to Action | |
 

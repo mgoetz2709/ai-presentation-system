@@ -95,9 +95,9 @@ gleichermaßen entscheidend ist — keine erkennbare vierte Kategorie fehlt.
 | 8 | Modellwahl und Lizenzprüfung laufen bewusst getrennt von der Technologiebegeisterung — Screening vor Festlegung | G1 — Vendor-Screening & Lizenzprüfung | |
 | 9 | Baustein 2 macht die Discovery in drei abhängigen Schritten von der Bereichsliste bis zur Use-Case-Longlist steuerbar | G2 — Fahrplan-Übersicht | |
 | 10 | Strukturierte Interviews mit Prozessverantwortlichen holen Pain Points direkt an der Quelle statt aus Annahmen | G2 — Interviews & Prozessprüfung | |
-| 11 | Opportunity Scoring nach Wirkung, Automatisierbarkeit und Datenverfügbarkeit macht die Fokusauswahl objektiv statt Bauchgefühl | G2 — Use-Case-Longlist & Scoring-Framework | |
+| 11 | Opportunity Scoring nach Wirkung, Automatisierbarkeit und Datenverfügbarkeit macht die Fokusauswahl objektiv | G2 — Use-Case-Longlist & Scoring-Framework | |
 | 12 | Der Fahrplan funktioniert nur mit klar verteilten Commitments auf beiden Seiten — nicht nur MGIM liefert | G3 — Rollen & Commitments | |
-| 13 | Eine Woche mit vier parallelen kritischen Strängen ist das größte Terminrisiko der Phase — und bereits heute mit drei Entzerrungsoptionen geplant | G3 — Kapazitätsrisiko | |
+| 13 | Ihre Interviews kollidieren mit zwei kritischen Baustein-1-Arbeiten — das entschärfen wir jetzt gemeinsam, nicht erst im Oktober | G3 — Kapazitätsrisiko | |
 | 14 | Checkpoint 1 Mitte November ist der einzige Punkt, an dem gemeinsam über Fortsetzung, Anpassung oder Abbruch entschieden wird | G3 — Checkpoint als Entscheidungspunkt | |
 | 15 | Der Kickoff selbst ist der erste Commitment-Moment — Rollen und Ansprechpartner müssen bis Kickoff-Ende stehen | Closing — Call to Action | |
 
@@ -166,7 +166,7 @@ gleichermaßen entscheidend ist — keine erkennbare vierte Kategorie fehlt.
 - **role_in_arc:** G2 — Schritt 2 der Abhängigkeitskette.
 - **argument_group:** G2.
 
-## Slide 11: Opportunity Scoring nach Wirkung, Automatisierbarkeit und Datenverfügbarkeit macht die Fokusauswahl objektiv statt Bauchgefühl
+## Slide 11: Opportunity Scoring nach Wirkung, Automatisierbarkeit und Datenverfügbarkeit macht die Fokusauswahl objektiv
 - **core_message:** Die Use-Case-Longlist wird nach einem festen, dreidimensionalen Kriterienraster
   bewertet, bevor am Checkpoint ein Fokusbereich ausgewählt wird — noch ohne konkrete Scores, da
   diese erst im Projektverlauf entstehen.
@@ -179,19 +179,23 @@ gleichermaßen entscheidend ist — keine erkennbare vierte Kategorie fehlt.
 - **role_in_arc:** G3 — erste unabhängige Governance-Aussage.
 - **argument_group:** G3.
 
-## Slide 13: Eine Woche mit vier parallelen kritischen Strängen ist das größte Terminrisiko der Phase — und bereits heute mit drei Entzerrungsoptionen geplant
-- **core_message:** Das Kapazitätsrisiko in der Woche 6.10.–24.10. ist identifiziert und aktiv
-  gemanagt, nicht erst nachträglich entdeckt.
+## Slide 13: Ihre Interviews kollidieren mit zwei kritischen Baustein-1-Arbeiten — das entschärfen wir jetzt gemeinsam, nicht erst im Oktober
+- **core_message:** Das Kapazitätsrisiko in der Woche 6.10.–24.10. betrifft RIEDELs eigene
+  Fachbereiche direkt und ist bereits jetzt mit drei Entzerrungsoptionen aktiv gemanagt, nicht
+  erst nachträglich entdeckt.
 - **role_in_arc:** G3 — zweite unabhängige Governance-Aussage.
 - **argument_group:** G3.
 
-## Slide 14: Checkpoint 1 Mitte November ist der einzige Punkt, an dem gemeinsam über Fortsetzung, Anpassung oder Abbruch entschieden wird
-- **core_message:** Checkpoint 1 bündelt die Ergebnisse beider Bausteine zu einer einzigen,
-  begründeten Entscheidung — das eigentliche Ziel der gesamten Phase.
+## Slide 14: Mehrere laufende Entscheidungen bündeln sich am Checkpoint 1 zu einer gemeinsamen Fortsetzungsentscheidung
+- **core_message:** Checkpoint 1 bündelt mehrere bereits im Fahrplan laufende Entscheidungspunkte
+  beider Bausteine zu einer einzigen, gut vorbereiteten Fortsetzungsentscheidung — das eigentliche
+  Ziel der gesamten Phase, nicht das einzige Governance-Ereignis der Phase.
 - **role_in_arc:** G3 — dritte unabhängige Governance-Aussage, Kulmination der Argumentation.
 - **argument_group:** G3.
 
-## Slide 15: Der Kickoff selbst ist der erste Commitment-Moment — Rollen und Ansprechpartner müssen bis Kickoff-Ende stehen
-- **core_message:** Der unmittelbare nächste Schritt ist konkret und terminiert, nicht vage.
+## Slide 15: Der Kickoff gelingt am besten mit Ihrer Einschätzung, wer aus dem Unternehmen eingebunden werden sollte
+- **core_message:** Der unmittelbare nächste Schritt ist konkret und terminiert, formuliert als
+  Bitte um Mitwirkung statt als Vorgabe, und schließt mit einer offenen Frage nach der Expertise
+  des CTO.
 - **role_in_arc:** Closing / Call to Action.
 - **argument_group:** closing.

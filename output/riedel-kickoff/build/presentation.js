@@ -713,7 +713,10 @@ const NOTES_PREFIX = '';
   addHeadline(slide, 'Ihre Interviews kollidieren mit zwei kritischen Baustein-1-Arbeiten —\ndas entschärfen wir jetzt gemeinsam, nicht erst im Oktober', { fontSize: 19 });
 
   const chartPath = path.join(REPO_ROOT, 'output', 'riedel-kickoff', 'charts', 'slide_13_chart.png');
-  slide.addImage({ path: chartPath, x: 0.5, y: 1.2, w: 8.5, h: 4.8 });
+  slide.addImage({
+    path: chartPath, x: 0.5, y: 1.2, w: 8.5, h: 4.8,
+    altText: 'Swimlane-Diagramm zeigt vier parallel laufende Arbeitsstränge in der Woche 6.10.–24.10. mit Überlappung und einem Marker für die Budget-Zwischenlieferung am 20.10.',
+  });
 
   addInsightBox(slide, ShapeType,
     'Betrifft Sie direkt: Ihre Fachbereiche stehen in derselben Woche für Interviews UND für die Pilot-Use-Case-Entscheidung bereit.\n\nWelche Option passt am besten — bitte heute entscheiden:\n\n1. Interviews auf 2 statt 3 Wochen verdichten\n\n2. Budget-Zwischenlieferung auf Screening-Basis halten\n\n3. Pilot-Use-Case-Auswahl (B1) eine Woche vorziehen',
@@ -794,7 +797,7 @@ const NOTES_PREFIX = '';
   slide.addShape(ShapeType.rect, { x: EDGE_MARGIN_X, y: 2.85, w: 3.5, h: 0.03, fill: { color: C.blue }, line: { color: C.blue } });
 
   const asks = [
-    'Wir würden Sie bitten, uns bis Kickoff-Ende die Ansprechpartner für CISO, Datenschutz, Legal und die Fachbereiche zu nennen',
+    'Wir würden Sie bitten, uns bis Kickoff-Ende (22.9.) die Ansprechpartner für CISO, Datenschutz, Legal und die Fachbereiche zu nennen',
     'Ihre Sicht ist gefragt: Passt die vorgeschlagene Bereichsliste für die Discovery, oder sehen Sie das anders?',
     'MGIM liefert die Kickoff-Agenda vorab bis 19.9.',
   ];
