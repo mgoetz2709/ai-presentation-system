@@ -361,10 +361,10 @@ const NOTES_PREFIX = '';
     });
   });
 
-  addInsightBox(slide, ShapeType, 'Der genaue Umfang wird im Arbeitspaket "Technische Definition" (27.10.–7.11.) gemeinsam verbindlich festgelegt — Ziel: realistische Erwartungen an Umfang und Kosten von Anfang an.', CONTENT_X, y + 2.85, CONTENT_W, 0.7);
+  addInsightBox(slide, ShapeType, 'Der genaue Umfang wird im Arbeitspaket "Technische Definition" (27.10.–7.11.) gemeinsam verbindlich festgelegt. Noch offen und Teil dieser Definition: der Zugriffsweg — z. B. eigenes Chat-Frontend oder Integration in bestehende Tools. Ziel: realistische Erwartungen an Umfang und Kosten von Anfang an.', CONTENT_X, y + 2.85, CONTENT_W, 0.85);
 
   addFooter(slide);
-  slide.addNotes('Bevor wir tiefer einsteigen, kurz eine Erwartungsklärung: "Eigenes LLM" bedeutet nicht, dass wir ein Sprachmodell von null trainieren — das wäre für ein Unternehmen in dieser Größenordnung weder sinnvoll noch wirtschaftlich. Es bedeutet: ein bestehendes Open-Weight-Modell als Basis, RAG für den kontrollierten Zugriff auf Ihre eigenen Daten, und Fine-Tuning beziehungsweise LoRA für die gezielte Anpassung an Ihre Aufgaben. Diese drei Bausteine zusammen ergeben "Ihr eigenes LLM" — mit einem überschaubaren, kalkulierbaren Aufwand statt einer technologischen Wundertüte. Der genaue Zuschnitt wird im Oktober/November gemeinsam verbindlich festgelegt.');
+  slide.addNotes('Bevor wir tiefer einsteigen, kurz eine Erwartungsklärung: "Eigenes LLM" bedeutet nicht, dass wir ein Sprachmodell von null trainieren — das wäre für ein Unternehmen in dieser Größenordnung weder sinnvoll noch wirtschaftlich. Es bedeutet: ein bestehendes Open-Weight-Modell als Basis, RAG für den kontrollierten Zugriff auf Ihre eigenen Daten, und Fine-Tuning beziehungsweise LoRA für die gezielte Anpassung an Ihre Aufgaben. Diese drei Bausteine zusammen ergeben "Ihr eigenes LLM" — mit einem überschaubaren, kalkulierbaren Aufwand statt einer technologischen Wundertüte. Ausdrücklich noch offen und Teil der technischen Definition: wie greifen Ihre Mitarbeitenden am Ende darauf zu — über ein eigenes Frontend oder eingebettet in vorhandene Tools? Der genaue Zuschnitt wird im Oktober/November gemeinsam verbindlich festgelegt.');
 })();
 
 // ============================================================
@@ -490,11 +490,11 @@ const NOTES_PREFIX = '';
     autoPage: false,
   });
 
-  addInsightBox(slide, ShapeType, 'Lizenzrechtliche Prüfung startet parallel (bis 7.11.) — Open-Weight bedeutet nicht automatisch lizenzfreie Nutzung. Nutzungsbeschränkungen variieren je Modell/Version und müssen bei jedem Versionswechsel neu geprüft werden. Beides ist explizites Checkpoint-1-Kriterium.', CONTENT_X, CONTENT_TOP + 3.55, CONTENT_W, 1.05);
+  addInsightBox(slide, ShapeType, 'Lizenzrechtliche Prüfung startet parallel (bis 7.11.) und deckt zwei oft übersehene Punkte ab: White-Label-Fähigkeit (nicht jedes kommerzielle Modell erlaubt Rebranding — deshalb früh in der Modellwahl berücksichtigen) und, bei On-Premise-Optionen wie Aleph Alpha, die Kapazität des eigenen Rechenzentrums (u. a. GPU-Verfügbarkeit). Beides ist explizites Checkpoint-1-Kriterium.', CONTENT_X, CONTENT_TOP + 3.4, CONTENT_W, 1.15);
   addSourceLine(slide, 'Quelle Anbieter-Positionierung: ki-beratung-unternehmen.de, LLM-Vergleich DACH, 2026. Quelle Lizenzrisiko: Skillbyte Insights, 2026.', CONTENT_X, CONTENT_TOP + 4.65, CONTENT_W);
 
   addFooter(slide);
-  slide.addNotes('Vier Kandidaten stehen im Screening: Mistral als europäisch-souveränes, kosteneffizientes Arbeitspferd, Aleph Alpha aus Heidelberg mit Fokus auf On-Premise und regulierte Branchen, Meta Llama als kommerziell nutzbar, aber mit einer Nutzerzahl-Ausschlussklausel, und OpenGPT-X als deutsches Konsortialprojekt, das im Marktvergleich zuletzt etwas zurückgefallen ist. Wichtig: Open Weight heißt nicht automatisch lizenzfrei nutzbar. Deshalb läuft parallel zum Markt-Screening eine eigene lizenzrechtliche Prüfung — und genau das ist ein explizites Kriterium für den Checkpoint, nicht nur eine Randnotiz.');
+  slide.addNotes('Vier Kandidaten stehen im Screening: Mistral als europäisch-souveränes, kosteneffizientes Arbeitspferd, Aleph Alpha aus Heidelberg mit Fokus auf On-Premise und regulierte Branchen, Meta Llama als kommerziell nutzbar, aber mit einer Nutzerzahl-Ausschlussklausel, und OpenGPT-X als deutsches Konsortialprojekt, das im Marktvergleich zuletzt etwas zurückgefallen ist. Wichtig: Open Weight heißt nicht automatisch lizenzfrei nutzbar. Deshalb läuft parallel zum Markt-Screening eine eigene lizenzrechtliche Prüfung. Zwei Punkte darin werden gerne übersehen: Ob das gewählte Modell überhaupt White-Label-fähig ist — also ob RIEDEL das Ergebnis unter eigener Marke einsetzen darf — muss schon bei der Modellwahl geprüft werden, nicht erst danach. Und falls eine On-Premise-Lösung wie Aleph Alpha infrage kommt, muss auch die eigene Rechenzentrums-Kapazität stimmen, insbesondere verfügbare GPU-Hardware. Beides ist ein explizites Kriterium für den Checkpoint, nicht nur eine Randnotiz.');
 })();
 
 // ============================================================
@@ -758,15 +758,19 @@ const NOTES_PREFIX = '';
     color: C.midgrey, fontFace: 'Arial', align: 'center', margin: 0,
   });
 
-  const cpY = msY + msH + 0.45, cpW = 6.0, cpX = CONTENT_X + (CONTENT_W - cpW) / 2;
-  addCard(slide, ShapeType, cpX, cpY, cpW, 0.85, C.blue, C.blue, 0.1);
+  const cpY = msY + msH + 0.45, cpW = 8.5, cpH = 1.15, cpX = CONTENT_X + (CONTENT_W - cpW) / 2;
+  addCard(slide, ShapeType, cpX, cpY, cpW, cpH, C.blue, C.blue, 0.1);
   slide.addText('Checkpoint 1 — Woche 9.–13.11.2026', {
-    x: cpX, y: cpY, w: cpW, h: 0.85, fontSize: 15, bold: true, color: C.white,
+    x: cpX, y: cpY + 0.12, w: cpW, h: 0.4, fontSize: 15, bold: true, color: C.white,
     fontFace: 'Arial', align: 'center', valign: 'middle', margin: 0,
+  });
+  slide.addText('Bündelt: fixierte Leitplanken · Pilot-Use-Case entschieden · White-Label-Zielbild & Lizenzrisiken geklärt · initiale Vendor-Shortlist · Fokusbereiche Baustein 2 festgelegt', {
+    x: cpX + 0.2, y: cpY + 0.55, w: cpW - 0.4, h: 0.5, fontSize: 10, italic: true, color: C.white,
+    fontFace: 'Arial', align: 'center', valign: 'top', margin: 0, lineSpacingMultiple: 1.15,
   });
 
   const decisions = ['Fortsetzung', 'Anpassung', 'Bewusster Abbruch'];
-  const dY = cpY + 0.85 + 0.35;
+  const dY = cpY + cpH + 0.35;
   decisions.forEach((d, i) => {
     const x = COL3_X[i];
     addCard(slide, ShapeType, x, dY, COL3_W, 0.8, C.grey, C.grey, 0.08);
@@ -778,7 +782,7 @@ const NOTES_PREFIX = '';
   addSourceLine(slide, 'Entscheidungsvorlage: MGIM. Auf Faktenbasis, nicht auf Bauchgefühl.', CONTENT_X, dY + 0.95, CONTENT_W);
 
   addFooter(slide);
-  slide.addNotes('Governance in dieser Phase heißt nicht: fünf Monate arbeiten und erst am Ende erfahren, ob es funktioniert hat. Es gibt laufend Entscheidungspunkte — die Kickoff-Rollen, die Kommentierung der Leitplanken durch CISO und Datenschutz, die Pilot-Use-Case-Entscheidung, die bewertete Longlist. All das bündelt sich am Checkpoint in der Woche vom 9. bis 13. November zu einer gemeinsamen, gut vorbereiteten Fortsetzungsentscheidung — mit voller Fortsetzung, mit Anpassungen, oder, falls die Faktenlage es nahelegt, auch mit einem bewussten Stopp.');
+  slide.addNotes('Governance in dieser Phase heißt nicht: fünf Monate arbeiten und erst am Ende erfahren, ob es funktioniert hat. Es gibt laufend Entscheidungspunkte — die Kickoff-Rollen, die Kommentierung der Leitplanken durch CISO und Datenschutz, die Pilot-Use-Case-Entscheidung, die bewertete Longlist. All das bündelt sich am Checkpoint in der Woche vom 9. bis 13. November zu einer gemeinsamen, gut vorbereiteten Fortsetzungsentscheidung: fixierte Leitplanken, der entschiedene Pilot-Use-Case, ein geklärtes White-Label-Zielbild samt Lizenzrisiken, eine erste Vendor-Shortlist, und die festgelegten Fokusbereiche für Baustein 2 — mit voller Fortsetzung, mit Anpassungen, oder, falls die Faktenlage es nahelegt, auch mit einem bewussten Stopp.');
 })();
 
 // ============================================================

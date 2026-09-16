@@ -152,11 +152,18 @@ Baustein 1, von Kickoff bis Checkpoint-1-Vorlage.
 
 ## Slide 5: "Eigenes LLM" heißt Open-Weight-Modell plus RAG und Fine-Tuning — kein Training from Scratch
 
+**Design-Hinweis (Revision 6, nach Rückmeldung von Markus Goetz):** Markus Goetz fragte gezielt
+nach, ob das Deck erwähnt, dass ein eigenes Frontend/Zugriffsweg benötigt wird. Prüfung ergab: Das
+stand weder im Kundendokument noch im Deck — echter Scope-Punkt, kein Fehler in der Übernahme.
+Ergänzt als explizit offener Punkt in der Insight-Box, nicht als Zusage (der Zugriffsweg ist
+tatsächlich noch nicht entschieden).
+
 **Bullets**
 - Open-Weight-Basismodell (z. B. Mistral, Aleph Alpha, Llama, OpenGPT-X) statt eigenes Modell "from Scratch" trainieren
 - RAG (Retrieval-Augmented Generation) bindet unternehmenseigene Daten kontrolliert ein, ohne sie ins Modell einzutrainieren
 - Fine-Tuning/LoRA passt das Modell gezielt an RIEDEL-spezifische Aufgaben an, mit überschaubarem Aufwand
 - Der Umfang wird im Arbeitspaket "Technische Definition" (27.10.–7.11.) gemeinsam verbindlich festgelegt
+- Ausdrücklich noch offen und Teil dieser Definition: der Zugriffsweg (eigenes Chat-Frontend oder Integration in bestehende Tools)
 
 **Speaker Notes**
 Bevor wir tiefer einsteigen, kurz eine Erwartungsklärung: "Eigenes LLM" bedeutet nicht, dass wir
@@ -164,8 +171,10 @@ ein Sprachmodell von null trainieren — das wäre für ein Unternehmen in diese
 sinnvoll noch wirtschaftlich. Es bedeutet: ein bestehendes Open-Weight-Modell als Basis, RAG für
 den kontrollierten Zugriff auf Ihre eigenen Daten, und Fine-Tuning beziehungsweise LoRA für die
 gezielte Anpassung an Ihre Aufgaben. Diese drei Bausteine zusammen ergeben "Ihr eigenes LLM" — mit
-einem überschaubaren, kalkulierbaren Aufwand statt einer technologischen Wundertüte. Der genaue
-Zuschnitt wird im Oktober/November gemeinsam verbindlich festgelegt.
+einem überschaubaren, kalkulierbaren Aufwand statt einer technologischen Wundertüte. Ausdrücklich
+noch offen und Teil der technischen Definition: wie greifen Ihre Mitarbeitenden am Ende darauf zu
+— über ein eigenes Frontend oder eingebettet in vorhandene Tools? Der genaue Zuschnitt wird im
+Oktober/November gemeinsam verbindlich festgelegt.
 
 **Visual Spec**
 CONTENT-Slide mit einem dreiteiligen Baustein-Diagramm (Icon-Block): "Open-Weight-Modell" +
@@ -255,10 +264,20 @@ rechts Pilot-Use-Case-Auswahl.
 
 ## Slide 8: Modellwahl und Lizenzprüfung laufen bewusst getrennt von der Technologiebegeisterung — Screening vor Festlegung
 
+**Design-Hinweis (Revision 6, nach Rückmeldung von Markus Goetz):** Nachfrage, ob das Deck erwähnt,
+dass (a) die Modellwahl früh erfolgen muss, weil nicht jedes kommerzielle Modell White-Label-fähig
+ist, und (b) die Capabilities des eigenen Rechenzentrums (u. a. NVIDIA-/GPU-Verfügbarkeit) geprüft
+werden müssen. Beides fehlte — (a) war zwar im Kundendokument als Checkpoint-1-Kriterium
+"White-Label-Zielbild" angelegt, aber nirgends mit der Lizenzprüfung verknüpft; (b) fehlt im
+Kundendokument selbst komplett und wurde hier als offener Punkt ergänzt (keine Zusage, dass RIEDEL
+NVIDIA-Hardware hat, nur die Ankündigung, dass es geprüft werden muss). Beide Punkte in die
+bestehende Insight-Box aufgenommen statt eine neue Folie zu eröffnen.
+
 **Bullets**
 - Markt-/Vendor-Screening (3.–14.11.): Kurzbewertung + Tendenz zu Mistral, Aleph Alpha, Meta Llama, OpenGPT-X
 - Lizenzrechtliche Prüfung startet parallel (bis 7.11.) — Open-Weight bedeutet nicht automatisch lizenzfreie Nutzung
-- Nutzungsbeschränkungen variieren je Modell und Version und müssen bei jedem Versionswechsel neu geprüft werden
+- White-Label-Fähigkeit muss schon bei der Modellwahl geprüft werden — nicht jedes kommerzielle Modell erlaubt Rebranding
+- Bei On-Premise-Optionen (z. B. Aleph Alpha): Kapazität des eigenen Rechenzentrums prüfen, insbesondere GPU-Verfügbarkeit
 - Beides ist explizites Checkpoint-1-Kriterium — vermeidet Investition in ein Modell mit späterer Nutzungssperre
 
 **Speaker Notes**
@@ -267,8 +286,12 @@ Arbeitspferd, Aleph Alpha aus Heidelberg mit Fokus auf On-Premise und regulierte
 Llama als kommerziell nutzbar, aber mit einer Nutzerzahl-Ausschlussklausel, und OpenGPT-X als
 deutsches Konsortialprojekt, das im Marktvergleich zuletzt etwas zurückgefallen ist. Wichtig: Open
 Weight heißt nicht automatisch lizenzfrei nutzbar. Deshalb läuft parallel zum Markt-Screening eine
-eigene lizenzrechtliche Prüfung — und genau das ist ein explizites Kriterium für den Checkpoint,
-nicht nur eine Randnotiz.
+eigene lizenzrechtliche Prüfung. Zwei Punkte darin werden gerne übersehen: Ob das gewählte Modell
+überhaupt White-Label-fähig ist — also ob RIEDEL das Ergebnis unter eigener Marke einsetzen darf —
+muss schon bei der Modellwahl geprüft werden, nicht erst danach. Und falls eine On-Premise-Lösung
+wie Aleph Alpha infrage kommt, muss auch die eigene Rechenzentrums-Kapazität stimmen, insbesondere
+verfügbare GPU-Hardware. Beides ist ein explizites Kriterium für den Checkpoint, nicht nur eine
+Randnotiz.
 
 **Visual Spec**
 COMPARISON-Slide mit kompakter Vier-Zeilen-Tabelle: Anbieter | Positionierung | Relevanz für
@@ -474,9 +497,15 @@ Pilot-Use-Case-Entscheidung, Longlist-Bewertung), die sich am Checkpoint 1 zu ei
 gut vorbereiteten Fortsetzungsentscheidung bündeln — keine fiktiven neuen Meilensteine, sondern
 eine andere Rahmung bereits vorhandener Fahrplan-Punkte.
 
+**Regression gefunden & behoben (Revision 6):** Bei der Revision-5-Neugestaltung fiel versehentlich
+heraus, dass Checkpoint 1 laut Kundendokument konkret "White-Label-Zielbild", geklärte
+Lizenzrisiken und eine initiale Vendor-Shortlist liefert (nicht nur eine abstrakte
+"Fortsetzungsentscheidung"). Markus Goetz fragte gezielt nach dem White-Label-Punkt; Prüfung ergab
+den fehlenden Inhalt. Wiederhergestellt als Untertitel der Checkpoint-1-Karte.
+
 **Bullets / Diagramm-Inhalt**
 - 4 laufende Entscheidungspunkte (Mini-Zeitleiste): Kickoff: Rollen & Scope (21.–22.9.) → Leitplanken kommentiert (bis 10.10.) → Pilot-Use-Case entschieden (bis 24.10.) → Longlist bewertet (bis 7.11.)
-- "bündelt sich zu" → Checkpoint 1 (Woche 9.–13.11.2026)
+- "bündelt sich zu" → Checkpoint 1 (Woche 9.–13.11.2026), bündelt: fixierte Leitplanken, entschiedener Pilot-Use-Case, geklärtes White-Label-Zielbild & Lizenzrisiken, initiale Vendor-Shortlist, festgelegte Fokusbereiche Baustein 2
 - 3 mögliche Ergebnisse: Fortsetzung / Anpassung / Bewusster Abbruch — auf Faktenbasis, nicht auf Bauchgefühl
 
 **Speaker Notes**

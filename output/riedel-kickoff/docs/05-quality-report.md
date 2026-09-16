@@ -1,5 +1,28 @@
 # Quality Report — RIEDEL Networks Kickoff-Deck
 
+## Addendum (Revision 6, nach Abschluss der Quality Review)
+
+Nach Freigabe fragte Markus Goetz gezielt nach, ob drei Fachpunkte im Deck erwähnt sind: (1) ein
+eigenes Frontend/Zugriffsweg, (2) dass die Modellwahl früh erfolgen muss, weil nicht jedes
+kommerzielle Modell White-Label-fähig ist, und (3) eine Prüfung der Rechenzentrums-Capabilities
+(u. a. NVIDIA/GPU) für On-Premise-Optionen. Prüfung ergab:
+
+- **(1) Frontend:** fehlte komplett — weder im Deck noch im Kundendokument. Echter Scope-Punkt,
+  kein Übernahmefehler. Als offener Punkt in Folie 5s Insight-Box ergänzt.
+- **(2) White-Label/Modellwahl:** teilweise vorhanden, aber nicht verknüpft — das Kundendokument
+  nennt "White-Label-Zielbild" als Checkpoint-1-Kriterium, das Deck hatte diesen Begriff in einer
+  früheren Fassung von Folie 14 auch, verlor ihn aber durch die Revision-5-Neugestaltung dieser
+  Folie (**echte Regression**, siehe Dimension 2 unten). Zusätzlich fehlte die explizite
+  Verknüpfung "nicht jedes Modell erlaubt Rebranding" auf Folie 8, wo sie inhaltlich hingehört.
+  Beides ergänzt.
+- **(3) Rechenzentrum/GPU-Prüfung:** fehlte komplett, auch im Kundendokument selbst. Als offener
+  Punkt auf Folie 8 ergänzt (Ankündigung einer Prüfung, keine Zusage vorhandener Hardware).
+
+Alle drei Ergänzungen wurden auf Rückfrage des Nutzers vorgenommen (nicht eigenständig erfunden;
+die Formulierungen sind als offene Punkte markiert, nicht als abgeschlossene Fakten). Deck neu
+gebaut, `validate.py` erneut bestanden. Die Regression aus Punkt (2) ist unten in Dimension 2 als
+zusätzlicher Befund dokumentiert. **Release-Entscheidung bleibt APPROVED** nach diesen Korrekturen.
+
 ## Executive Summary
 
 15 Folien, alle fünf Dimensionen geprüft. Keine kritischen Befunde. Zwei Major-Befunde wurden
@@ -127,6 +150,9 @@ Keine Befunde in dieser Dimension.
 | 4 | Vollversalien "UND" statt Kursiv/Fett zur Betonung | Minor | 13 | Design (5D) | Offen, nicht blockierend |
 | 5 | Redundante Untertitel-Formulierung | Minor | 1 | Content (Phase 4) | Offen, nicht blockierend |
 | 6 | Durchgehend vollflächiges MG Blue bei Prozessboxen/-pfeilen | Minor | 9 (und etabliertes Muster im gesamten Deck) | Design (5D) | Offen, nicht blockierend — etablierte Konvention dieses Decks |
+| 7 | Regression: "White-Label-Zielbild" (Checkpoint-1-Kriterium laut Kundendokument) ging bei der Revision-5-Neugestaltung von Folie 14 verloren, ohne verknüpft zur Modellwahl auf Folie 8 zu sein | Major | 8, 14 | Design (5D) | **Behoben** (Revision 6) — wiederhergestellt und mit Modellwahl verknüpft |
+| 8 | Fehlende Erwähnung: eigenes Frontend/Zugriffsweg als offener Scope-Punkt | Major (Vollständigkeitslücke, nicht Fehler) | 5 | Content (Phase 4) / Research (Quelldokument nennt es nicht) | **Behoben** (Revision 6) — als offener Punkt ergänzt |
+| 9 | Fehlende Erwähnung: Prüfung der Rechenzentrums-Capabilities (GPU/NVIDIA) für On-Premise-Optionen | Major (Vollständigkeitslücke, nicht Fehler) | 8 | Content (Phase 4) / Research (Quelldokument nennt es nicht) | **Behoben** (Revision 6) — als offener Punkt ergänzt |
 
 ## Release-Entscheidung
 
