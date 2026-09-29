@@ -351,12 +351,13 @@ beschrifteten Entscheidungstoren zwischen den Phasen und ihren jeweiligen Voraus
 
 ## Slide 11: Fünf Grundprinzipien stellen sicher, dass der Mensch verantwortlich bleibt und KI nie unautorisiert Preise oder Verträge zusagt
 
-**Bullets**
-- Der Mensch bleibt verantwortlich — KI unterstützt Entscheidungen, trifft sie nicht
-- Keine Preis- oder Vertragszusagen durch KI ohne menschliche Freigabe
-- Stufenweise Einführung: Pilot vor Rollout, Messung vor Skalierung
-- Transparenz: Quellen, Unsicherheiten und Annahmen sind für den Nutzer immer sichtbar
-- Datenschutz by Design von Anfang an mitgedacht
+**Bullets** (je Prinzip: Bedeutet / Nutzen für RIEDEL — Revision nach Kundenfeedback: Karten statt
+Icon-Grid, jede mit explizitem RIEDEL-Nutzen statt bloßem Prinzip-Label)
+- Mensch bleibt verantwortlich — Bedeutet: KI unterstützt, entscheidet nicht. Nutzen für RIEDEL: Kundenvertrauen bleibt erhalten, Vertrieb bleibt entscheidungsbefugt
+- Keine unautorisierten Zusagen — Bedeutet: keine Preis-/Vertragszusage durch KI ohne menschliche Freigabe. Nutzen für RIEDEL: Schutz vor finanziell/rechtlich bindenden Fehlern
+- Stufenweise Einführung — Bedeutet: Pilot vor Rollout, Messung vor Skalierung. Nutzen für RIEDEL: Risiko/Investition bleiben kontrollierbar, Fehler fallen früh und günstig auf
+- Transparenz — Bedeutet: Quellen, Unsicherheiten, Annahmen immer sichtbar. Nutzen für RIEDEL: Vertrieb kann jede KI-Aussage selbst prüfen und beim Kunden verantworten
+- Datenschutz by Design — Bedeutet: von Anfang an mitgedacht. Nutzen für RIEDEL: vermeidet teure DSGVO-Nachbesserungen und Compliance-Risiken
 
 **Speaker Notes**
 Bevor wir zu den nächsten Schritten kommen, ein wichtiger Punkt zur Kontrolle: fünf
@@ -369,14 +370,21 @@ Rollout, Messung vor Skalierung. Jede KI-Ausgabe zeigt ihre Quellen, Unsicherhei
 transparent. Und Datenschutz ist von Anfang an mitgedacht, nicht nachträglich aufgesetzt.
 
 **Visual Spec**
-ICON-Grid-Layout: fünf gleichgewichtige Icon-Karten (`addIconBlock`-Pattern) in einer Reihe,
-gleiche Größe und visuelles Gewicht (induktive, unabhängige Prinzipien — keine Rangfolge im
-Layout suggerieren, außer durch die Bullet-Reihenfolge selbst).
+Fünf gleichgewichtige Karten in einer Reihe (revidiert von Icon-Grid auf das "Aufgabe/Nutzen"-
+Kartenmuster aus Folie 5, um Kundenfeedback zu Überlappung und zu dünner Erklärung zu adressieren):
+grauer Kopfbereich mit Prinzip-Titel (weiß, bold, zweizeilig möglich), darunter zwei beschriftete
+Textzeilen je Karte — "Bedeutet:" (grau, das Prinzip in einem Satz) und "Nutzen für RIEDEL:"
+(blau hervorgehoben, der konkrete Geschäftsnutzen). Dünner blauer Akzentstreifen über jeder Karte.
+Darunter eine Insight-Box, die die fünf Prinzipien direkt an die in der Complication (Folie 3)
+implizite Sorge zurückbindet: "Diese fünf Prinzipien sind der Grund, warum RIEDEL KI im Vertrieb
+einsetzen kann, ohne Kontrolle über Preise, Verträge oder die Kundenbeziehung zu verlieren."
+Gleiche Größe/Gewicht aller fünf Karten (induktiv, keine Rangfolge).
 
 **Alt-Text**
-Fünf gleich gewichtete Icon-Karten für die KI-Governance-Grundprinzipien: menschliche
-Verantwortung, keine unautorisierten Preis-/Vertragszusagen, stufenweise Einführung,
-Transparenz und Datenschutz by Design.
+Fünf gleich gewichtete Karten für die KI-Governance-Grundprinzipien, jede mit grauem Titel-Header
+und zwei Zeilen "Bedeutet" / "Nutzen für RIEDEL": menschliche Verantwortung, keine unautorisierten
+Preis-/Vertragszusagen, stufenweise Einführung, Transparenz und Datenschutz by Design. Darunter
+eine Insight-Box, die die Prinzipien mit der Vertrauensfrage aus der Eröffnung verknüpft.
 
 ---
 

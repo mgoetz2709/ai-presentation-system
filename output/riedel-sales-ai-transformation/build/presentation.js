@@ -547,24 +547,68 @@ function addNumberedCard(slide, x, y, w, h, n, title) {
   addHeadline(slide, 'Fünf Grundprinzipien stellen sicher, dass der Mensch verantwortlich bleibt\nund KI nie unautorisiert Preise oder Verträge zusagt');
 
   const principles = [
-    ['Mensch verantwortlich', 'KI unterstützt Entscheidungen, trifft sie nicht'],
-    ['Keine Zusagen', 'Keine Preis-/Vertragszusagen durch KI ohne menschliche Freigabe'],
-    ['Stufenweise', 'Pilot vor Rollout, Messung vor Skalierung'],
-    ['Transparenz', 'Quellen, Unsicherheiten und Annahmen immer sichtbar'],
-    ['Datenschutz by Design', 'Von Anfang an mitgedacht, nicht nachträglich aufgesetzt'],
+    {
+      title: 'Mensch bleibt\nverantwortlich',
+      bedeutet: 'KI unterstützt Entscheidungen, trifft sie nicht.',
+      nutzen: 'Vertrauen der Kunden bleibt erhalten — Vertrieb bleibt entscheidungsbefugt.',
+    },
+    {
+      title: 'Keine unautorisierten\nZusagen',
+      bedeutet: 'Keine Preis- oder Vertragszusage durch KI ohne menschliche Freigabe.',
+      nutzen: 'Schützt RIEDEL vor finanziell und rechtlich bindenden Fehlern.',
+    },
+    {
+      title: 'Stufenweise\nEinführung',
+      bedeutet: 'Pilot vor Rollout, Messung vor Skalierung.',
+      nutzen: 'Risiko und Investition bleiben kontrollierbar — Fehler fallen früh und günstig auf.',
+    },
+    {
+      title: 'Transparenz',
+      bedeutet: 'Quellen, Unsicherheiten und Annahmen sind immer sichtbar.',
+      nutzen: 'Vertrieb kann jede KI-Aussage selbst prüfen und beim Kunden verantworten.',
+    },
+    {
+      title: 'Datenschutz\nby Design',
+      bedeutet: 'Von Anfang an mitgedacht, nicht nachträglich aufgesetzt.',
+      nutzen: 'Vermeidet teure DSGVO-Nachbesserungen und Compliance-Risiken.',
+    },
   ];
-  const gap = 0.35;
-  const iconW = 1.1;
-  const totalW = principles.length * iconW + (principles.length - 1) * gap;
-  const startX = CONTENT_X + (CONTENT_W - totalW) / 2;
+
+  const gap = 0.18;
+  const cardW = (CONTENT_W - 4 * gap) / 5;
+  const cardY = CONTENT_TOP + 0.15, headerH = 0.75, cardH = 3.15;
+
   principles.forEach((p, i) => {
-    const x = startX + i * (iconW + gap);
-    addIconBlock(slide, ShapeType, p[0], p[1], x, CONTENT_TOP + 0.7);
+    const x = CONTENT_X + i * (cardW + gap);
+    slide.addShape(ShapeType.rect, { x, y: cardY, w: cardW, h: 0.05, fill: { color: C.blue }, line: { color: C.blue } });
+    slide.addShape(ShapeType.rect, { x, y: cardY + 0.05, w: cardW, h: cardH - 0.05, fill: { color: C.offwht }, line: { color: C.ltgrey, width: 1 } });
+    slide.addShape(ShapeType.rect, { x, y: cardY + 0.05, w: cardW, h: headerH, fill: { color: C.grey }, line: { color: C.grey } });
+    slide.addText(p.title, {
+      x: x + 0.1, y: cardY + 0.05, w: cardW - 0.2, h: headerH, fontSize: 11.5, bold: true, color: C.white,
+      fontFace: 'Arial', align: 'center', valign: 'middle', margin: 0, lineSpacingMultiple: 1.05,
+    });
+    slide.addText(
+      [
+        { text: 'Bedeutet: ', options: { bold: true, color: C.grey, breakLine: false } },
+        { text: p.bedeutet, options: { color: C.black, breakLine: true } },
+        { text: '\n', options: { breakLine: true } },
+        { text: 'Nutzen für RIEDEL: ', options: { bold: true, color: C.blue, breakLine: false } },
+        { text: p.nutzen, options: { color: C.black } },
+      ],
+      {
+        x: x + 0.13, y: cardY + headerH + 0.18, w: cardW - 0.26, h: cardH - headerH - 0.3, fontSize: 9.5,
+        fontFace: 'Arial', align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.2,
+      }
+    );
   });
 
-  addSourceLine(slide, 'Quelle: Konzeptdokument RIEDEL AI Sales Transformation, Abschnitt 7.', CONTENT_X, 6.4, CONTENT_W);
+  addInsightBox(slide, ShapeType,
+    'Diese fünf Prinzipien sind der Grund, warum RIEDEL KI im Vertrieb einsetzen kann, ohne Kontrolle über Preise, Verträge oder die Kundenbeziehung zu verlieren.',
+    CONTENT_X, cardY + cardH + 0.2, CONTENT_W, 0.7);
+
+  addSourceLine(slide, 'Quelle: Konzeptdokument RIEDEL AI Sales Transformation, Abschnitt 7.', CONTENT_X, cardY + cardH + 1.0, CONTENT_W);
   addFooter(slide);
-  slide.addNotes('Bevor wir zu den nächsten Schritten kommen, ein wichtiger Punkt zur Kontrolle: fünf Grundprinzipien gelten für jeden der fünf Bausteine, ohne Ausnahme. Das Wichtigste zuerst: der Mensch bleibt verantwortlich, KI unterstützt, entscheidet aber nicht. Direkt daraus folgt das für Sie vermutlich relevanteste Prinzip: KI sagt niemals Preise oder Vertragskonditionen ohne menschliche Freigabe zu — das bleibt in jedem Baustein, auch bei Kalkulationen und Vertragsmanagement, explizit ausgeschlossen. Wir führen grundsätzlich stufenweise ein, Pilot vor Rollout, Messung vor Skalierung. Jede KI-Ausgabe zeigt ihre Quellen, Unsicherheiten und Annahmen transparent. Und Datenschutz ist von Anfang an mitgedacht, nicht nachträglich aufgesetzt.');
+  slide.addNotes('Bevor wir zu den nächsten Schritten kommen, ein wichtiger Punkt zur Kontrolle: fünf Grundprinzipien gelten für jeden der fünf Bausteine, ohne Ausnahme. Das Wichtigste zuerst: der Mensch bleibt verantwortlich, KI unterstützt, entscheidet aber nicht — das erhält das Vertrauen der Kunden und lässt den Vertrieb entscheidungsbefugt. Direkt daraus folgt das für Sie vermutlich relevanteste Prinzip: KI sagt niemals Preise oder Vertragskonditionen ohne menschliche Freigabe zu — das schützt RIEDEL vor finanziell und rechtlich bindenden Fehlern, auch bei Kalkulationen und Vertragsmanagement. Wir führen grundsätzlich stufenweise ein, Pilot vor Rollout, Messung vor Skalierung, damit Risiko und Investition kontrollierbar bleiben und Fehler früh und günstig auffallen. Jede KI-Ausgabe zeigt ihre Quellen, Unsicherheiten und Annahmen transparent, damit der Vertrieb jede Aussage selbst prüfen und beim Kunden verantworten kann. Und Datenschutz ist von Anfang an mitgedacht, nicht nachträglich aufgesetzt — das erspart uns teure DSGVO-Nachbesserungen später. Zusammengenommen sind das die fünf Gründe, warum Sie KI im Vertrieb einsetzen können, ohne Kontrolle über Preise, Verträge oder die Kundenbeziehung zu verlieren.');
 })();
 
 // ============================================================
