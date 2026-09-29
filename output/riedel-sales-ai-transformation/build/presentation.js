@@ -57,6 +57,19 @@ function addBulletBlock(slide, items, x, y, w, h, opts) {
   );
 }
 
+// Open-question checklist — checkbox glyph instead of a bullet dot, deliberately different
+// texture from addBulletBlock (used for "still to verify" items, never for settled facts).
+function addChecklistBlock(slide, items, x, y, w, h, opts) {
+  const o = opts || {};
+  slide.addText(
+    items.map((t, i) => ({ text: `☐  ${t}`, options: { color: o.color || C.black, breakLine: i < items.length - 1 } })),
+    {
+      x, y, w, h, fontSize: o.fontSize || 10.5, color: o.color || C.black, fontFace: 'Arial',
+      align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.3,
+    }
+  );
+}
+
 function addConnector(slide, x, y, w) {
   slide.addShape(ShapeType.rect, { x, y, w, h: 0.03, fill: { color: C.midgrey }, line: { color: C.midgrey } });
 }
@@ -419,34 +432,68 @@ function addNumberedCard(slide, x, y, w, h, n, title) {
     color: C.white, fontFace: 'Arial', align: 'center', valign: 'middle', margin: 0,
   });
 
-  const colY = CONTENT_TOP + 0.55, headerH = 0.5, colH = 3.3;
+  const colY = CONTENT_TOP + 0.5, headerH = 0.5;
   const colW = (CONTENT_W - 0.4) / 2;
   const colX = [CONTENT_X, CONTENT_X + colW + 0.4];
 
-  slide.addShape(ShapeType.rect, { x: colX[0], y: colY, w: colW, h: headerH, fill: { color: C.grey }, line: { color: C.grey } });
-  slide.addText('Vertragsmanagement', { x: colX[0] + 0.15, y: colY, w: colW - 0.3, h: headerH, fontSize: 14, bold: true, color: C.white, fontFace: 'Arial', align: 'left', valign: 'middle', margin: 0 });
-  addBulletBlock(slide, [
+  function panel(x, title, headerColor, capabilities, checks, nextStep) {
+    slide.addShape(ShapeType.rect, { x, y: colY, w: colW, h: headerH, fill: { color: headerColor }, line: { color: headerColor } });
+    slide.addText(title, { x: x + 0.15, y: colY, w: colW - 0.3, h: headerH, fontSize: 14, bold: true, color: C.white, fontFace: 'Arial', align: 'left', valign: 'middle', margin: 0 });
+
+    slide.addText('WAS DIE KI LEISTEN SOLL', {
+      x, y: colY + headerH + 0.15, w: colW, h: 0.25, fontSize: 9.5, bold: true, color: C.midgrey,
+      fontFace: 'Arial', align: 'left', valign: 'top', margin: 0, charSpacing: 1,
+    });
+    addBulletBlock(slide, capabilities, x, colY + headerH + 0.42, colW, 1.05, { fontSize: 11 });
+
+    const checkY = colY + headerH + 1.55;
+    slide.addShape(ShapeType.roundRect, {
+      x, y: checkY, w: colW, h: 1.75, fill: { color: C.offwht },
+      line: { color: C.midgrey, width: 1, dashType: 'dash' }, rectRadius: 0.06,
+    });
+    slide.addText('MACHBARKEIT PRÜFEN — BIS ZUR PHASE-2-FREIGABE ZU KLÄREN', {
+      x: x + 0.15, y: checkY + 0.1, w: colW - 0.3, h: 0.3, fontSize: 9, bold: true, color: C.grey,
+      fontFace: 'Arial', align: 'left', valign: 'top', margin: 0,
+    });
+    addChecklistBlock(slide, checks, x + 0.15, checkY + 0.42, colW - 0.3, 1.25, { fontSize: 10 });
+
+    const tagY = checkY + 1.75 + 0.15;
+    slide.addShape(ShapeType.rect, { x, y: tagY, w: colW, h: 0.4, fill: { color: headerColor }, line: { color: headerColor } });
+    slide.addText([
+      { text: 'Nächster Schritt: ', options: { bold: true, breakLine: false } },
+      { text: nextStep, options: { bold: false } },
+    ], {
+      x: x + 0.15, y: tagY, w: colW - 0.3, h: 0.4, fontSize: 10, color: C.white,
+      fontFace: 'Arial', align: 'left', valign: 'middle', margin: 0,
+    });
+  }
+
+  panel(colX[0], 'Vertragsmanagement', C.grey, [
     'Automatisierte Vertragserstellung aus Standardvorlagen',
     'KI-Prüfung von Kundenkommentaren: akzeptabel / verhandelbar / kritisch',
     'Standardisierte Proof-of-Concept-Vereinbarungen',
-  ], colX[0], colY + headerH + 0.2, colW, colH - headerH - 0.2, { fontSize: 12.5 });
+  ], [
+    'Welche Vertragsvorlagen existieren bereits, wer gibt sie frei?',
+    'Wie werden Kundenkommentare heute erfasst (E-Mail, Tracked Changes, PDF)?',
+    'Wer entscheidet bei "kritisch" eingestuften Kommentaren?',
+  ], 'Vertragsvorlagen & Freigabeprozess dokumentieren (Q2 2027)');
 
-  slide.addShape(ShapeType.rect, { x: colX[1], y: colY, w: colW, h: headerH, fill: { color: C.blue }, line: { color: C.blue } });
-  slide.addText('Bid Management', { x: colX[1] + 0.15, y: colY, w: colW - 0.3, h: headerH, fontSize: 14, bold: true, color: C.white, fontFace: 'Arial', align: 'left', valign: 'middle', margin: 0 });
-  addBulletBlock(slide, [
+  panel(colX[1], 'Bid Management', C.blue, [
     'Strukturierte Bedarfsanalyse aus Gesprächsnotizen',
     'Abgleich mit historischen Angeboten zur Erfolgseinschätzung',
     'Statusverfolgung mit Follow-up-Empfehlungen',
-  ], colX[1], colY + headerH + 0.2, colW, colH - headerH - 0.2, { fontSize: 12.5 });
+  ], [
+    'Liegen historische Angebote (gewonnen/verloren) strukturiert genug vor?',
+    'In welchem Format/System liegen Gesprächsnotizen heute vor?',
+    'Wie wird Erfolgswahrscheinlichkeit heute überhaupt eingeschätzt?',
+  ], 'Historische Angebotsdaten sichten und strukturieren (Q2 2027)');
 
-  slide.addShape(ShapeType.line, {
-    x: CONTENT_X + colW + 0.2, y: colY, w: 0, h: colH, line: { color: C.ltgrey, width: 1 },
-  });
+  slide.addShape(ShapeType.line, { x: CONTENT_X + colW + 0.2, y: colY, w: 0, h: 4.35, line: { color: C.ltgrey, width: 1 } });
 
-  addSourceLine(slide, 'Beide Bausteine sind konzeptionell ausgearbeitet, aber bewusst noch nicht Teil der heutigen Pilot-Entscheidung. Quelle: Konzeptdokument, Abschnitt 3.3–3.4.', CONTENT_X, colY + colH + 0.2, CONTENT_W);
+  addSourceLine(slide, 'Machbarkeits-Prüfpunkte sind unsere Einschätzung offener Fragen, keine abschließende Bewertung. Quelle: Konzeptdokument, Abschnitt 3.3–3.4 und Abschnitt 8.', CONTENT_X, 6.5, CONTENT_W);
 
   addFooter(slide);
-  slide.addNotes('Zwei weitere Bausteine sind gedanklich genauso weit wie die drei, die gerade starten — wir schlagen nur vor, sie erst in Phase 2 anzugehen. Vertragsmanagement deckt drei Bereiche ab: automatisierte Vertragserstellung, die Prüfung von Kundenkommentaren und Redlines mit einer klaren Einstufung akzeptabel/verhandelbar/kritisch, und standardisierte Proof-of-Concept-Vereinbarungen. Bid Management unterstützt die strukturierte Bedarfsanalyse aus Gesprächsnotizen und vergleicht neue Angebote automatisch mit historischen, gewonnenen und verlorenen Angeboten, um die Erfolgswahrscheinlichkeit realistischer einzuschätzen. Beide sind laut Priorisierungsmatrix als Phase 2 eingestuft — wir bringen sie heute nur zur Vollständigkeit, nicht zur Entscheidung.');
+  slide.addNotes('Zwei weitere Bausteine sind gedanklich genauso weit wie die drei, die gerade starten — wir schlagen nur vor, sie erst in Phase 2 anzugehen. Vertragsmanagement deckt drei Bereiche ab: automatisierte Vertragserstellung, die Prüfung von Kundenkommentaren und Redlines mit einer klaren Einstufung akzeptabel/verhandelbar/kritisch, und standardisierte Proof-of-Concept-Vereinbarungen. Bid Management unterstützt die strukturierte Bedarfsanalyse aus Gesprächsnotizen und vergleicht neue Angebote automatisch mit historischen, gewonnenen und verlorenen Angeboten, um die Erfolgswahrscheinlichkeit realistischer einzuschätzen. Beide sind laut Priorisierungsmatrix als Phase 2 eingestuft — wir bringen sie heute nur zur Vollständigkeit, nicht zur Entscheidung. Wichtig ist aber, schon jetzt zu zeigen, was wir bis zur Phase-2-Freigabe konkret klären müssen: bei Vertragsmanagement, welche Vorlagen es gibt und wer sie freigibt, wie Kundenkommentare heute überhaupt erfasst werden, und wer bei kritischen Fällen entscheidet. Bei Bid Management, ob unsere historischen Angebote strukturiert genug vorliegen, um daraus zu lernen, in welchem Format die Gesprächsnotizen heute stehen, und wie wir Erfolgswahrscheinlichkeit bisher überhaupt einschätzen. Das sind bewusst offene Fragen, keine fertigen Antworten — die klären wir als ersten Schritt in Phase 2, nicht heute.');
 })();
 
 // ============================================================

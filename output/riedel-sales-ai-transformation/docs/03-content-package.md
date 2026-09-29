@@ -258,11 +258,13 @@ Deals-Liste beginnt.
 
 ## Slide 8: Vertragsmanagement und Bid Management folgen in Phase 2 — vorbereitet, aber noch nicht Teil der heutigen Pilot-Entscheidung
 
-**Bullets**
-- Vertragsmanagement: automatisierte Vertragserstellung aus Vorlagen, KI-Prüfung von Kundenkommentaren (akzeptabel/verhandelbar/kritisch), standardisierte PoC-Vereinbarungen
-- Bid Management: strukturierte Bedarfsanalyse aus Gesprächsnotizen, Abgleich mit historischen Angeboten zur Erfolgseinschätzung, Statusverfolgung mit Follow-up-Empfehlungen
-- Beide Bausteine sind konzeptionell ausgearbeitet, aber bewusst noch nicht Teil der heutigen Pilot-Entscheidung
-- Empfehlung laut Priorisierungsmatrix: Phase 2 (Q2–Q3 2027), im Anschluss an die Phase-1-Piloten
+**Bullets** (Revision nach Kundenfeedback: Folie ausführlicher, mit explizitem Fokus auf die
+Machbarkeitsprüfung je Baustein statt nur auf die KI-Fähigkeiten)
+- Vertragsmanagement — was die KI leisten soll: automatisierte Vertragserstellung aus Vorlagen, KI-Prüfung von Kundenkommentaren (akzeptabel/verhandelbar/kritisch), standardisierte PoC-Vereinbarungen
+- Vertragsmanagement — Machbarkeit bis zur Phase-2-Freigabe zu klären: welche Vertragsvorlagen existieren und wer sie freigibt, wie Kundenkommentare heute erfasst werden, wer bei kritischen Fällen entscheidet
+- Bid Management — was die KI leisten soll: strukturierte Bedarfsanalyse aus Gesprächsnotizen, Abgleich mit historischen Angeboten zur Erfolgseinschätzung, Statusverfolgung mit Follow-up-Empfehlungen
+- Bid Management — Machbarkeit bis zur Phase-2-Freigabe zu klären: ob historische Angebote strukturiert genug vorliegen, in welchem Format Gesprächsnotizen heute stehen, wie Erfolgswahrscheinlichkeit heute überhaupt eingeschätzt wird
+- Empfehlung laut Priorisierungsmatrix unverändert: Phase 2 (Q2–Q3 2027), im Anschluss an die Phase-1-Piloten — die Machbarkeitsfragen sind der erste Schritt darin, keine neue Vorbedingung
 
 **Speaker Notes**
 Zwei weitere Bausteine sind gedanklich genauso weit wie die drei, die gerade starten — wir
@@ -275,14 +277,21 @@ um die Erfolgswahrscheinlichkeit realistischer einzuschätzen. Beide sind laut P
 als Phase 2 eingestuft — wir bringen sie heute nur zur Vollständigkeit, nicht zur Entscheidung.
 
 **Visual Spec**
-COMPARISON-Layout, zweispaltig, deutlich reduzierter visueller Umfang gegenüber den
-Detail-Folien 5–7 (kein Vier-Karten-Raster, nur zwei schlanke Spaltenkarten mit je 3 Kurzzeilen):
-Spalte 1 "Vertragsmanagement", Spalte 2 "Bid Management", beide mit einem gemeinsamen
-"Phase 2 · Q2–Q3 2027"-Badge oben zentriert statt pro Karte wiederholt.
+COMPARISON-Layout, zweispaltig, jetzt dreistufig pro Spalte statt einer reinen Bullet-Liste
+(Revision — bewusst andere Textur als die Nachbarfolien: Checkbox-Glyphen `☐` statt Bullet-Punkte
+für die Machbarkeitsfragen, gestrichelte Box statt durchgezogener Rahmen):
+1) Kopfzeile "WAS DIE KI LEISTEN SOLL" + 3 Kurz-Bullets (wie zuvor),
+2) gestrichelt umrandete Box "MACHBARKEIT PRÜFEN — BIS ZUR PHASE-2-FREIGABE ZU KLÄREN" mit 3
+Checkbox-Fragen je Baustein,
+3) ein farbiger "Nächster Schritt:"-Tag am Fuß jeder Spalte mit einer konkreten, terminierten
+Sofortmaßnahme.
+Spalte 1 "Vertragsmanagement" (grauer Header), Spalte 2 "Bid Management" (blauer Header), beide
+mit gemeinsamem "Phase 2 · Q2–Q3 2027"-Badge oben zentriert.
 
 **Alt-Text**
-Zweispaltiger Vergleich von Vertragsmanagement und Bid Management, beide mit der Kennzeichnung
-Phase 2, jede Spalte mit drei geplanten KI-Fähigkeiten.
+Zweispaltiges Layout zu Vertragsmanagement und Bid Management: je Spalte drei KI-Fähigkeiten,
+darunter eine gestrichelt umrandete Checkliste offener Machbarkeitsfragen mit Checkbox-Symbolen,
+darunter ein farbiger Tag mit dem konkreten nächsten Schritt.
 
 ---
 
