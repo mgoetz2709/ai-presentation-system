@@ -28,20 +28,26 @@ Every per-slide deliverable (Storyline Blueprint, Content Package, Design classi
 Quality Report) opens with this table before the per-slide detail sections:
 
 ```markdown
-| slide_id | working headline | slide role in arc | type (assigned in Phase 5, blank before then) |
-|---|---|---|---|
-| 1 | Der Markt wächst 18% p.a. | Opening hook | TITLE |
-| 2 | ... | Problem definition | STAT |
+| slide_id | working headline | slide role in arc | layer | type (assigned in Phase 5, blank before then) |
+|---|---|---|---|---|
+| 1 | Der Markt wächst 18% p.a. | Opening hook | narrative | TITLE |
+| 2 | ... | Problem definition | narrative | STAT |
 ```
 
 ## Minimum fields per phase, per `slide_id`
 
 | Phase | Adds |
 |---|---|
-| **Storyline** | `working_headline`, `core_message`, `role_in_arc`, `argument_group`, `framework` + `governing_thought` + MECE argument-group list (deck-level, not per-slide — see `knowledge/minto-pyramid-prinzip.md`) |
-| **Content** | `final_headline` (assertion, may refine the working headline), `bullets[]` (≤5), `speaker_notes`, `visual_spec` (what data/diagram this slide needs), `alt_text` |
+| **Storyline** | `working_headline`, `core_message`, `role_in_arc`, `argument_group`, `layer` (`narrative` \| `appendix` \| `optional` — see `knowledge/ppt-planner-slide-layout-content-blocks.md` §2 for when a slide belongs in the appendix layer instead of the narrative run), `framework` + `governing_thought` + MECE argument-group list (deck-level, not per-slide — see `knowledge/minto-pyramid-prinzip.md`) |
+| **Content** | `final_headline` (assertion, may refine the working headline), `bullets[]` (≤5), `speaker_notes`, `visual_spec` (what data/diagram this slide needs, broken into named content blocks per `knowledge/ppt-planner-slide-layout-content-blocks.md` §4 when there's more than one visual element), `alt_text` — plus, as a second deliverable alongside the Content Package, the same slide re-expressed structure-only in `03b-copilot-slide-plan.md` (§7 of that same knowledge file) |
 | **Design** | `slide_type` (TITLE/CONTENT/STAT/CHART/PROCESS/COMPARISON/TIMELINE/CLOSING), `chart_script_ref` (if CHART), `layout_notes` |
 | **Quality** | `dimension_findings[]` (dimension, severity, description, correction, responsible phase) |
+
+`layer` governs presentation order, not `slide_id` order: narrative-layer slides are always
+sequenced before appendix, and appendix before optional, in every downstream document and in the
+final deck — regardless of the order slide_ids happen to have been assigned in. A `slide_id` is a
+stable identifier for joining documents across phases, not a mandate that slides present in that
+numeric order.
 
 ## Why Markdown, not JSON
 
@@ -62,6 +68,7 @@ restarts partway through:
 output/<project-slug>/docs/01-research-brief.md
 output/<project-slug>/docs/02-storyline-blueprint.md
 output/<project-slug>/docs/03-content-package.md
+output/<project-slug>/docs/03b-copilot-slide-plan.md
 output/<project-slug>/docs/04-design-delivery-report.md
 output/<project-slug>/docs/05-quality-report.md
 output/<project-slug>/charts/slide_NN_chart.png

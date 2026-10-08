@@ -34,8 +34,11 @@ emphasis on top of this baseline for the duration of that phase.
 - `brand-guide/mgim-brand-guide.md` — the binding MGIM CI. Single source of truth for every
   phase; don't paste a copy into any intermediate doc, reference the file.
 - `docs/slide-schema.md` — the `slide_id` contract every phase must respect.
-- `knowledge/` — sourced knowledge bases applied directly during Storyline, Content, and Quality
-  (e.g. `minto-pyramid-prinzip.md` for governing thought, MECE, SCQA, the headline test).
+- `knowledge/` — sourced knowledge bases applied directly during Storyline, Content, Design, and
+  Quality: `minto-pyramid-prinzip.md` for governing thought, MECE, SCQA, the headline test;
+  `ppt-planner-slide-layout-content-blocks.md` for the five universal layout rules, the
+  stakeholder-reporting skeleton, the content-block vocabulary (KPI Tile, Metric Cluster, Ask
+  Block, Risk Block, Chart Block), the chart-encoding table, and the anti-pattern checklist.
 - `lib/pptx-helpers.js`, `lib/chart_style.py` — canonical color tokens + layout/chart
   primitives. Nobody redefines these; scripts `require`/`import` them.
 
@@ -48,6 +51,7 @@ Pick a kebab-case slug from the topic (e.g. "Digitalisierung im Mittelstand" →
 output/<slug>/docs/01-research-brief.md
 output/<slug>/docs/02-storyline-blueprint.md
 output/<slug>/docs/03-content-package.md
+output/<slug>/docs/03b-copilot-slide-plan.md
 output/<slug>/docs/04-design-delivery-report.md
 output/<slug>/docs/05-quality-report.md
 output/<slug>/charts/slide_NN_chart.py
@@ -55,6 +59,10 @@ output/<slug>/charts/slide_NN_chart.png
 output/<slug>/build/presentation.js
 output/<slug>/<slug>.pptx
 ```
+
+`03b-copilot-slide-plan.md` only exists once Phase 4 has run — see Phase 4's final step and the
+Path A/B checkpoint there. Everything through `03-content-package.md` is produced for every
+project regardless of which path gets chosen afterward.
 
 Every phase below writes its own deliverable to `output/<slug>/docs/` (or `charts/`/`build/`)
 before moving to the next phase — not just held in your own working context. This keeps the
@@ -66,10 +74,23 @@ phases' work.
 Ask Markus Goetz, one question at a time, conversationally (not a form dump): Thema/Titel,
 Zielgruppe, Zweck, Folienanzahl, Ton/Stil (default direct/pragmatic; C-Level → formal/
 executive), Branding beyond MGIM CI (optional), zusätzliche Dokumente für die Recherche
-(optional).
+(optional), **existiert bereits eine gebrandete Kunden-PowerPoint-Vorlage (optional)** — relevant
+für die Path-A/B-Entscheidung am Ende von Phase 4, siehe dort.
 
-Summarize the complete brief back and get explicit confirmation before proceeding. Do not start
-Phase 2 without it.
+Then, in a second small batch (not the same message as the fields above — this is a distinct
+round, not more form-filling), ask the high-leverage clarification questions that make the
+difference between a deck that merely covers the topic and one that actually drives a decision:
+what are the 1–3 most important messages this time; what decision, if any, is required from the
+audience; what has changed since the last time this audience saw this topic; which facts/metrics/
+initiatives matter most; where are the main risks or open uncertainties. Ask only as many of
+these as are relevant to the briefing — skip any that don't apply (a one-off pitch has no "since
+last time"; a periodic stakeholder report has all five) — and never dump all five plus the
+structural fields in one wall of text. This batch is what later anchors the Governing Thought in
+Phase 3; a Phase 3 that has to guess at "what's the one thing that must land" produces a weaker
+deck than one built on an explicit answer gathered here.
+
+Summarize the complete brief back — structural fields and the clarification answers together —
+and get explicit confirmation before proceeding. Do not start Phase 2 without it.
 
 ## PHASE 2 — Research
 
@@ -124,10 +145,32 @@ below implement it directly.
    - **Hero's Journey** — pitches, vision presentations, inspirational keynotes.
    - **Problem-Agitate-Solve (PAS)** — sales presentations, client proposals.
    - **Pyramid Principle** — business reports, strategy decks, executive briefings.
+   - **Monthly/Periodic Stakeholder Reporting Skeleton** — recurring reporting cycles (monthly/
+     quarterly business reviews, steering committee updates, board reporting). Use when Phase 1's
+     clarification answers are reporting-shaped (a "what changed since last time," a scorecard of
+     ongoing metrics, a recurring audience). **Read
+     `knowledge/ppt-planner-slide-layout-content-blocks.md` §2 for the exact fixed skeleton and
+     split/merge rules** (Cover → Executive Summary, never split → optional What changed/why now
+     → Key metrics scorecard → Progress vs. goals/initiatives → optional Wins/highlights → Risks
+     & issues → Decision/Ask, one slide per decision → Financials (summary) → Outlook → Appendix)
+     — don't reinvent this skeleton per cycle; keep block positions stable across periods so the
+     audience navigates by muscle memory, and keep the narrative layer (presented slides) at
+     ≤10–15, routing everything else to the appendix layer.
    State the framework and a one-sentence rationale for why it fits this briefing. The framework
    shapes the overall arc (hook → tension → resolution vs. problem → agitation → solution); the
    Minto discipline in steps 2–3 and 6 applies underneath it regardless of which framework you
    pick — a PAS deck's "Problem" opening and a Pyramid deck's introduction are both SCQA moments.
+
+**Checkpoint — present before going further.** Show Markus Goetz the Governing Thought, the MECE
+argument groups (names + one-line summaries + logic type), and the chosen framework + rationale.
+Get explicit confirmation or corrections before assigning `slide_id`s or writing any per-slide
+detail. This is deliberately a separate, lighter-weight checkpoint from Phase 1's brief
+confirmation — it exists because the Governing Thought and argument structure are the most
+expensive thing to get wrong (everything downstream inherits the error), and they're cheap to
+fix here, before 10+ slides of detail are built on top of them. Do not skip this checkpoint
+because Phase 1 was already confirmed — Phase 1 confirmed the *brief*, this confirms the
+*argument*, and they can diverge once research is in.
+
 5. **Assign the `slide_id` index now** — see `docs/slide-schema.md` for the exact contract. This
    is the one and only point where slide count and order are decided. Every later phase works
    against this exact index; if a later phase makes you want to add/split/drop a slide, that
@@ -137,9 +180,14 @@ below implement it directly.
    complete summarizing assertion of the slide, answering "so what?", never a topic label, e.g.
    not "Marktentwicklung" but "Der Markt wächst 18% p.a. — Handlungsfenster schließt sich 2026"),
    `core_message` (one sentence — what the audience must remember), `role_in_arc` (its job in the
-   narrative: opening hook, problem definition, evidence, solution, call-to-action, etc.), and
+   narrative: opening hook, problem definition, evidence, solution, call-to-action, etc.),
    `argument_group` (which group from step 3, or "opening"/"closing" for slides outside the
-   argument body).
+   argument body), and `layer` (`narrative` — carries the deck's actual argument, presented
+   live; `appendix` — backup detail, not presented unless asked; `optional` — parked/nice-to-have,
+   included only if time allows). Default every slide to `narrative` unless there's a specific
+   reason it's backup material; don't let the appendix become a dumping ground for content you
+   didn't want to cut. Narrative slides are always presented before appendix/optional slides in
+   the final sequence regardless of where they sit in your working draft.
 7. **Structure the opening 1–2 slides as SCQA** (Situation → Complication → Question → Answer,
    where the Answer is the Governing Thought) — the concrete mechanism behind "opening hook."
 8. **Vertical consistency check** before finalizing: for each argument group's headline, do the
@@ -150,13 +198,15 @@ below implement it directly.
 
 Write the **Storyline Blueprint** to `output/<slug>/docs/02-storyline-blueprint.md`: open with
 the Governing Thought, the MECE argument groups (name, summary, logic type, `slide_id` range),
-the framework + rationale, the Slide Index table (`docs/slide-schema.md`), then one
-`## Slide {slide_id}: {working_headline}` section per slide with `core_message`, `role_in_arc`,
-`argument_group`.
+the framework + rationale, the Slide Index table (`docs/slide-schema.md`, now including the
+`layer` column), then one `## Slide {slide_id}: {working_headline}` section per slide with
+`core_message`, `role_in_arc`, `argument_group`, `layer`.
 
 Non-negotiables: always name the framework and rationale; always state the Governing Thought
-before deriving groups or slides; argument groups MECE-checked (an unresolved overlap or
-unflagged gap is an incomplete blueprint, not a nitpick); every slide has all four fields;
+before deriving groups or slides; the Governing Thought + argument groups + framework get the
+checkpoint confirmation before per-slide detail is written — never skip straight from research to
+a full blueprint; argument groups MECE-checked (an unresolved overlap or unflagged gap is an
+incomplete blueprint, not a nitpick); every slide has all five fields (including `layer`);
 headlines pass the headline test (checked again in Phase 6 and in the Visual Quality Gate, so
 get it right here); output always structured Markdown in the briefing's language. Structural
 weaknesses here cannot be fully corrected later — take the framework choice and the arc
@@ -197,13 +247,21 @@ For each `slide_id`:
    aloud, adding context that isn't on the slide itself.
 4. **Visual spec** — for any slide implying a chart, KPI, diagram, or comparison: name the data/
    structure needed (chart type if known, the numbers, the labels) for Phase 5 — don't leave
-   numeric claims as bare bullet text if they belong in a visual.
+   numeric claims as bare bullet text if they belong in a visual. For slides with more than one
+   distinct visual element, break the spec into **content blocks** per
+   `knowledge/ppt-planner-slide-layout-content-blocks.md` §4 — a named, self-contained unit (`KPI
+   Tile`, `Metric Cluster`, `Ask Block`, `Risk Block`, `Chart Block`, or a plain narrative/image
+   block) each with: what it shows, the data it needs, and its visual type. Apply that file's
+   Five Layout Rules (§1) here too, even outside a reporting deck: one idea per slide, ≤4 content
+   blocks, one focal point — a slide that's really five things crammed together is a Phase 3
+   restructuring call, not a Phase 4 cramming problem.
 5. **Alt-text** — descriptive, concise, accessibility-compliant, for every visual placeholder or
    image slot from the blueprint.
 
 Write the **Content Package** to `output/<slug>/docs/03-content-package.md`: Slide Index table
 carried over unchanged, then one `## Slide {slide_id}: {final_headline}` section per slide with
-`Bullets`, `Speaker Notes`, `Visual Spec`, `Alt-Text` subsections.
+`Bullets`, `Speaker Notes`, `Visual Spec` (with content blocks where the slide has more than one
+visual element), `Alt-Text` subsections.
 
 Non-negotiables: default tone direct/pragmatic, formal/executive only on explicit C-Level flag;
 every slide needs all four fields; every final headline passes the headline test and every
@@ -213,6 +271,70 @@ content needs more, that's a Phase 3 restructuring call (second slide or a diagr
 something to resolve by cramming; output always structured Markdown in the briefing's language.
 Weak or misaligned content here cannot be fully corrected in Phase 5 or 6 — this is the primary
 communication layer of the whole deck.
+
+### Second deliverable — the Copilot-ready Slide Plan
+
+Once the Content Package is written, produce a second, structure-only deliverable to
+`output/<slug>/docs/03b-copilot-slide-plan.md`. This exists because not every deck gets built by
+this skill's own Phase 5 — see the Path A/B checkpoint right after this. Produce it for every
+project regardless of which path gets chosen; it's cheap to write now and worthless to
+reconstruct later from memory.
+
+Same `slide_id` index, same content, re-expressed as pure structure and logic with **zero**
+visual-design decisions — no colors, fonts, pixel positions, or layout polish; that's Phase 5's
+job (or, on the Copilot path, Microsoft Copilot's). Exact schema and field meanings:
+`knowledge/ppt-planner-slide-layout-content-blocks.md` §7. One slide block per `slide_id`,
+narrative-layer slides first in presentation order, then appendix, then optional — never
+interleaved — all delivered as **one single, continuous Markdown code block** (this is what gets
+copy-pasted straight into Microsoft Copilot inside a client's own branded PowerPoint template, so
+it has to be one clean paste, not a document to re-assemble):
+
+```
+Slide N — [slide type]
+
+Headline:       <the final_headline from the Content Package — full-sentence assertion>
+Layout:         <high-level structure only: header + body split, grid, clusters — no positions>
+Content blocks:
+  - <block name> — <what it shows> — <data needed> — <visual type>
+  - ...
+Focal point:    <the one dominant element the eye should go to first>
+Data inputs:    <metrics/sources required, from the Research Brief>
+Layer:          narrative | appendix | optional
+Notes:          <split/merge decisions, anything Phase 3 flagged about this slide's logic type>
+Bullet points:
+  - ...
+Speaker notes:
+  - ...
+```
+
+Non-negotiables for this file: every slide from the Slide Index appears exactly once; narrative
+slides precede appendix/optional slides in the file regardless of their `slide_id` order (a
+`slide_id` is a stable identifier, not a mandate that appendix slides interleave with the
+narrative); no visual-design language anywhere in this file — if you catch yourself writing a
+color, a font, or a coordinate, that line belongs in Phase 5's build script, not here; the whole
+file is one Markdown code block, directly copy-pasteable, not split into prose sections.
+
+### Path A / Path B checkpoint
+
+Present both `03-content-package.md` and `03b-copilot-slide-plan.md` to Markus Goetz and ask
+which path this project takes:
+
+- **Path A — build here.** Continue into Phase 5: this skill writes the charts and the
+  PptxGenJS build script, runs the Visual Quality Gate, and delivers a finished `.pptx` in MGIM
+  CI. Default when there's no client template, or speed matters more than native client
+  branding.
+- **Path B — build in the client's own file.** Markus Goetz takes `03b-copilot-slide-plan.md`
+  and pastes it into Microsoft Copilot inside the client's own branded PowerPoint template
+  himself. This skill cannot drive Microsoft Copilot or write into a live PowerPoint session —
+  say so plainly if asked, don't imply otherwise. On this path, Phase 5 and Phase 6 as written
+  here don't run (there's no file for this skill to build or QA yet). If Markus Goetz later
+  brings back the resulting `.pptx` from that Copilot session, run Phase 6 (Quality Review)
+  against it directly — the Quality Report's dimensions apply to any finished deck, not only one
+  this skill's own Phase 5 produced; just skip any CI-compliance finding that assumes MGIM's own
+  brand guide where the client's own CI was intentionally used instead.
+
+Default to Path A if Markus Goetz doesn't have a strong preference — it's the only path that ends
+in a fully QA'd deliverable without further manual work on his side.
 
 ## PHASE 5 — Design + generation
 
@@ -229,6 +351,12 @@ Six steps, in sequence, no pause between them.
   and if it's serious enough to need a content change, go back and fix Phase 4 before continuing.
 - `docs/slide-schema.md` — classify and build against the exact `slide_id` index from Phase 3/4.
   Don't renumber, split, or drop slides here.
+- `knowledge/ppt-planner-slide-layout-content-blocks.md` — the Five Layout Rules (§1) apply to
+  every slide you build here, not only content-block/reporting slides: one idea per slide,
+  assertion-evidence layout, ≤4 content blocks (~4–6 visual elements), one focal point, slides as
+  cues not documents. §5's chart-encoding table (position/length beats angle/area beats color)
+  refines the chart-type specifics in 5C below; §6's anti-pattern checklist is an extra pass
+  before 5E, on top of the Visual Quality Gate.
 - `lib/pptx-helpers.js` — canonical color tokens (`C`) and layout primitives (`addHeaderBar`,
   `addFooter`, `addCard`, `addAccentBar`, `addSlashDivider`, `addHeroStat`, `addInsightBox`,
   `addProgressBar`, `addIconBlock`). `require()` this — never redefine tokens/primitives inline.
@@ -327,7 +455,7 @@ python /mnt/skills/public/pptx/scripts/office/validate.py output/<slug>/<slug>.p
 - `validate.py` reports any chart/slide-XML defect PowerPoint would refuse — fix in the
   generator, never by hand-editing the packed XML.
 
-Then the **Visual Quality Gate** — check every slide against all six before presenting to
+Then the **Visual Quality Gate** — check every slide against all eight before presenting to
 Markus Goetz. A deck that fails any gate is not delivered; fix it first (go back to 5B/5C/5D as
 needed, then re-run 5E):
 
@@ -341,9 +469,20 @@ needed, then re-run 5E):
 5. **Source citations present** — every data point has a 9pt Mid Grey source.
 6. **C-Level readiness** — could this go to a CEO/CFO unmodified? If it looks generic, crowded,
    or unpolished, fix it first.
+7. **Status is never color-only** — any RAG/traffic-light/status indicator carries an icon or
+   text label in addition to color (~8% of men are red-green colorblind); color alone fails this
+   even if it visually reads fine to you.
+8. **No chartjunk** — strip gridlines, borders, shadows, or decorative clip-art beyond what
+   `lib/chart_style.py` / the brand guide itself specifies; every pixel of ink should be data or
+   a label, not decoration.
+
+For any content-block-structured slide (KPI Tile, Metric Cluster, Ask Block, Risk Block), also
+run `knowledge/ppt-planner-slide-layout-content-blocks.md` §6's anti-pattern checklist — it
+catches block-level issues (bare numbers with no target/trend, two decisions stacked on one ask
+slide, layout drift from the previous period) these eight checks don't.
 
 **5F — Present to Markus Goetz.** Summarize: slide count/structure, slide types used, advanced
-visualizations included, design variant (default/C-Level), confirmation all 6 gates passed.
+visualizations included, design variant (default/C-Level), confirmation all 8 gates passed.
 Request explicit approval before Phase 6. On revision requests: make the specific fixes yourself
 (back to 5B/5C/5D), re-run 5E–5F. Repeat until approved.
 
@@ -374,6 +513,11 @@ Assess every slide against all five dimensions:
    - **Headline test** — every headline, read alone, states a complete finding and answers "so
      what?" A topic label is a Narrative Consistency finding, not a Content Quality nitpick — it
      means the argument structure itself is unclear.
+   - **5-second test** (`knowledge/ppt-planner-slide-layout-content-blocks.md` §3.3) — could a
+     time-pressed executive glance at this slide for five seconds and state its one takeaway? If
+     the eye has to hunt for the point, that's a Narrative Consistency finding alongside the
+     headline test, not a cosmetic Design finding — it means the focal point (Visual Quality Gate
+     check 4) and the headline aren't reinforcing each other.
    - **MECE check** — do Phase 3's argument groups actually avoid overlap, and is any flagged
      gap still acceptable or should it now be filled? Within each group, do the slides prove the
      group's claim (vertical consistency) or merely relate to it?
@@ -413,6 +557,7 @@ the exact change; output always structured Markdown in the briefing's language.
 
 ## PHASE 7 — Iteration or delivery
 
+On **Path A** (this skill built the deck):
 - **APPROVED** — deliver the final `.pptx` to Markus Goetz (`SendUserFile`) with a brief
   workflow summary.
 - **REVISION REQUIRED** — go back to the phase(s) named in the Quality Report and redo that work
@@ -421,17 +566,31 @@ the exact change; output always structured Markdown in the briefing's language.
 - **REJECTED** — inform Markus Goetz, summarize the critical issues, restart the affected
   phase(s) from scratch.
 
+On **Path B** (Copilot-ready plan, built outside this skill): delivery for this session *is*
+handing over `03b-copilot-slide-plan.md` at the end of Phase 4 — there is no Phase 5/6 to run yet
+because there's no file of this skill's own making to build or review. If Markus Goetz later
+returns with the `.pptx` Copilot produced from that plan, treat that as a fresh entry into Phase 6
+(Quality Review) against the actual file, then proceed through this phase as above based on that
+review's release decision.
+
 ## Non-negotiables (whole workflow)
 
 - Never start Phase 2 without Markus Goetz's explicit confirmation of the Phase 1 summary.
-- Never skip a phase; the workflow is strictly sequential.
+- Never start per-slide detail in Phase 3 without the Governing Thought/argument-groups/framework
+  checkpoint confirmation — two confirmation points, not one; they protect different things.
+- Never skip a phase; the workflow is strictly sequential (Path B excepted, see Phase 7 — Phase 5/
+  6 as written there simply don't apply to a deck this skill didn't build, until Markus Goetz
+  brings one back for review).
+- Always produce both `03-content-package.md` and `03b-copilot-slide-plan.md` at the end of
+  Phase 4, regardless of which path gets chosen at the checkpoint that follows — default to
+  Path A absent a stated preference.
 - Every phase's deliverable is written to `output/<slug>/docs/` (or `charts/`/`build/`) before
   you move on — never held only in your own working context, so a later phase (or a later
   session) can re-read it as ground truth instead of relying on your memory of it.
 - You execute every script yourself — this was already true when it was called "the
   Orchestrator's job"; it's simply the only job now.
 - All chart PNGs confirmed present before the PptxGenJS script runs — it depends on them.
-- You do not deliver a deck that fails any of the six Visual Quality Gate checks.
+- You do not deliver a deck that fails any of the eight Visual Quality Gate checks.
 - Every deck includes at least one advanced visualization (waterfall, slope chart, annotated
   line, proportional area, icon-grid, or hero stat) — plain bar charts and bullet lists are the
   floor, not the standard.
